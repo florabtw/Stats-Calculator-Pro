@@ -2,7 +2,6 @@ package me.nickpierson.StatsCalculatorPro.pc;
 
 import me.nickpierson.StatsCalculator.pc.PCActivity;
 import me.nickpierson.StatsCalculator.pc.PCModel;
-import me.nickpierson.StatsCalculator.pc.PCView;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,10 +14,8 @@ public class ProPCActivity extends PCActivity {
 		super.onCreate(savedInstanceState);
 
 		model = new PCModel();
-		view = new PCView(this);
-		ProPCPresenter.create(model, view);
-
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		view = new ProPCView(this);
+		ProPCPresenter.create(this, model, view);
 
 		setContentView(view.getView());
 	}
@@ -33,7 +30,7 @@ public class ProPCActivity extends PCActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == R.id.home_settings) {
-			// TODO
+			((ProPCView) view).menuSettings();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);

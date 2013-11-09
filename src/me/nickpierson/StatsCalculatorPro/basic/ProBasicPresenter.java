@@ -4,6 +4,7 @@ import me.nickpierson.StatsCalculator.basic.BasicModel;
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
 import me.nickpierson.StatsCalculator.basic.BasicView;
 import me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity;
+import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -21,5 +22,13 @@ public class ProBasicPresenter extends BasicPresenter {
 				activity.startActivity(new Intent(activity, ProBasicReferenceActivity.class));
 			}
 		}, BasicView.Types.MENU_REFERENCE);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				activity.startActivity(new Intent(activity, ProSettingsActivity.class));
+			}
+		}, ProBasicView.ProTypes.MENU_SETTINGS);
 	}
 }

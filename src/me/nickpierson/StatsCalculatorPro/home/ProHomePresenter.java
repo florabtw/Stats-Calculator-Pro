@@ -5,6 +5,7 @@ import me.nickpierson.StatsCalculator.home.HomePresenter;
 import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity;
 import me.nickpierson.StatsCalculatorPro.pc.ProPCActivity;
+import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -22,6 +23,10 @@ public class ProHomePresenter extends HomePresenter {
 			}
 		}, HomeView.Types.DESCRIPTIVE_BUTTON);
 
+		// TODO: The enum is wrong. It should be pulled into the ProHomeView.
+		// Same for
+		// the other screens. Make sure it isn't doing anything in
+		// StatsCalculator library
 		view.addListener(new ActionListener() {
 
 			@Override
@@ -29,6 +34,14 @@ public class ProHomePresenter extends HomePresenter {
 				activity.startActivity(new Intent(activity, ProPCActivity.class));
 			}
 		}, HomeView.Types.PERM_COMB_BUTTON);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				activity.startActivity(new Intent(activity, ProSettingsActivity.class));
+			}
+		}, ProHomeView.ProTypes.MENU_SETTINGS);
 	}
 
 }

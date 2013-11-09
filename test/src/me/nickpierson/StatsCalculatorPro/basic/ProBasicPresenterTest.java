@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
 import me.nickpierson.StatsCalculator.basic.BasicView;
 import me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity;
+import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,4 +35,14 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(activity, times(2)).startActivity(new Intent(activity, ProBasicReferenceActivity.class));
 	}
 
+	@Test
+	public void whenSettingsMenuIsPressed_SettingsScreenIsOpened() {
+		createPresenter();
+
+		verify(view).addListener(listener.capture(), eq(ProBasicView.ProTypes.MENU_SETTINGS));
+
+		listener.getValue().fire();
+
+		verify(activity, times(2)).startActivity(new Intent(activity, ProSettingsActivity.class));
+	}
 }

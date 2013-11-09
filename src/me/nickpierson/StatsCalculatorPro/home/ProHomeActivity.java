@@ -2,7 +2,6 @@ package me.nickpierson.StatsCalculatorPro.home;
 
 import me.nickpierson.StatsCalculator.home.HomeActivity;
 import me.nickpierson.StatsCalculator.home.HomeModel;
-import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +13,7 @@ public class ProHomeActivity extends HomeActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		view = new HomeView(this);
+		view = new ProHomeView(this);
 		model = new HomeModel();
 		ProHomePresenter.create(this, model, view);
 
@@ -31,7 +30,7 @@ public class ProHomeActivity extends HomeActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == R.id.home_settings) {
-			// TODO
+			((ProHomeView) view).menuSettings();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
