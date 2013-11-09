@@ -1,10 +1,10 @@
-package me.nickpierson.StatsCalculatorPro;
+package me.nickpierson.StatsCalculatorPro.home;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import me.nickpierson.StatsCalculator.HomePresenterTest;
-import me.nickpierson.StatsCalculator.HomeView;
+import me.nickpierson.StatsCalculator.home.HomePresenterTest;
+import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity;
 import me.nickpierson.StatsCalculatorPro.pc.ProPCActivity;
 

@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="me.nickpierson.StatsCalculatorPro.ProHomeActivity"
+            android:name="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -26,7 +26,7 @@
             android:name="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:parentActivityName="me.nickpierson.StatsCalculatorPro.ProHomeActivity"
+            android:parentActivityName="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -35,14 +35,14 @@
         <activity
             android:name="me.nickpierson.StatsCalculatorPro.pc.ProPCActivity"
             android:label="@string/app_name"
-            android:parentActivityName="me.nickpierson.StatsCalculatorPro.ProHomeActivity"
+            android:parentActivityName="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.nickpierson.StatsCalculatorPro.ProHomeActivity" />
         </activity>
         <activity
-            android:name="me.nickpierson.StatsCalculatorPro.basic.reference.ProBasicReferenceActivity"
+            android:name="me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity"
             android:label="@string/app_name"
             android:parentActivityName="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity" >
             <meta-data

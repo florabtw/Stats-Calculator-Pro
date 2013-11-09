@@ -3,7 +3,7 @@ package me.nickpierson.StatsCalculatorPro.basic;
 import me.nickpierson.StatsCalculator.basic.BasicModel;
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
 import me.nickpierson.StatsCalculator.basic.BasicView;
-import me.nickpierson.StatsCalculatorPro.basic.reference.ProBasicReferenceActivity;
+import me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity;
 import android.app.Activity;
 import android.content.Intent;
 

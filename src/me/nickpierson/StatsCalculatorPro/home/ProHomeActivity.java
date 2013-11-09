@@ -1,24 +1,22 @@
-package me.nickpierson.StatsCalculatorPro.basic;
+package me.nickpierson.StatsCalculatorPro.home;
 
-import me.nickpierson.StatsCalculator.basic.BasicActivity;
-import me.nickpierson.StatsCalculator.basic.BasicModel;
-import me.nickpierson.StatsCalculator.basic.BasicView;
+import me.nickpierson.StatsCalculator.home.HomeActivity;
+import me.nickpierson.StatsCalculator.home.HomeModel;
+import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ProBasicActivity extends BasicActivity {
+public class ProHomeActivity extends HomeActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		view = new BasicView(this);
-		model = new BasicModel(this);
-		ProBasicPresenter.create(this, model, view);
-
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		view = new HomeView(this);
+		model = new HomeModel();
+		ProHomePresenter.create(this, model, view);
 
 		setContentView(view.getView());
 	}

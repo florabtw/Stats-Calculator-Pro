@@ -1,8 +1,8 @@
-package me.nickpierson.StatsCalculatorPro;
+package me.nickpierson.StatsCalculatorPro.home;
 
-import me.nickpierson.StatsCalculator.HomeModel;
-import me.nickpierson.StatsCalculator.HomePresenter;
-import me.nickpierson.StatsCalculator.HomeView;
+import me.nickpierson.StatsCalculator.home.HomeModel;
+import me.nickpierson.StatsCalculator.home.HomePresenter;
+import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity;
 import me.nickpierson.StatsCalculatorPro.pc.ProPCActivity;
 import android.app.Activity;
