@@ -42,7 +42,7 @@
                 android:value="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity" />
         </activity>
         <activity
-            android:name="me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity"
+            android:name="me.nickpierson.StatsCalculator.reference.BasicReferenceActivity"
             android:label="@string/app_name"
             android:parentActivityName="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity" >
             <meta-data
@@ -52,7 +52,7 @@
         <activity
             android:name="me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity"
             android:label="@string/app_name" >
-        </activity>
+      </activity>
     </application>
 
 </manifest>

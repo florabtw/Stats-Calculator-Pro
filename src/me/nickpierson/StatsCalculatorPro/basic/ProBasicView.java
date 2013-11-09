@@ -6,7 +6,7 @@ import android.app.Activity;
 public class ProBasicView extends BasicView {
 
 	public enum ProTypes {
-		MENU_REFERENCE, MENU_SETTINGS;
+		MENU_SETTINGS;
 	}
 
 	public ProBasicView(Activity activity) {

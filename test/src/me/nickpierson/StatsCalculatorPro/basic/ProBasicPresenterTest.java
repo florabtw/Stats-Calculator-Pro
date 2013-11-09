@@ -4,8 +4,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
-import me.nickpierson.StatsCalculator.basic.BasicView;
-import me.nickpierson.StatsCalculatorPro.reference.ProBasicReferenceActivity;
 import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
 
 import org.junit.Test;
@@ -22,17 +20,6 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	@Override
 	public void createPresenter() {
 		ProBasicPresenter.create(activity, model, view);
-	}
-
-	@Test
-	public void whenMenuReferenceGuideIsClicked_ThenReferenceGuideIsShown() {
-		createPresenter();
-
-		verify(view).addListener(listener.capture(), eq(BasicView.Types.MENU_REFERENCE));
-
-		listener.getValue().fire();
-
-		verify(activity, times(2)).startActivity(new Intent(activity, ProBasicReferenceActivity.class));
 	}
 
 	@Test
