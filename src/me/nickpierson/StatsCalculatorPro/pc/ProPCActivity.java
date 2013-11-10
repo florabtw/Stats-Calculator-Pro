@@ -14,7 +14,7 @@ public class ProPCActivity extends PCActivity {
 
 		model = new PCModel();
 		view = new ProPCView(this);
-		ProPCPresenter.create(this, model, view);
+		ProPCPresenter.create(this, model, (ProPCView) view);
 
 		setContentView(view.getView());
 	}

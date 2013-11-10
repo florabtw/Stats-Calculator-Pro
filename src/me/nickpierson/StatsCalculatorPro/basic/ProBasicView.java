@@ -47,5 +47,4 @@ public class ProBasicView extends BasicView implements IHelperView {
 		/* Skips MVP */
 		proKeypadHelper.backspace(etInput);
 	}
-
 }

@@ -1,6 +1,7 @@
 package me.nickpierson.StatsCalculatorPro.pc;
 
 import me.nickpierson.StatsCalculator.pc.PCView;
+import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ProPCView extends PCView {
+public class ProPCView extends PCView implements IHelperView {
 
 	ProKeypadHelper proKeypadHelper;
 
@@ -32,6 +33,11 @@ public class ProPCView extends PCView {
 				return true;
 			}
 		});
+	}
+
+	@Override
+	public void wakeLock() {
+		view.setKeepScreenOn(true);
 	}
 
 	public void keypadPress(Button button) {
