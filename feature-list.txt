@@ -1,0 +1,14 @@
+        Descriptive:
+- Screen stays on if preference is set
+
+        Perm & Comb:
+- Screen stays on if preference is set
+
+        Keypad:
+- Vibrate feedback on keypress if preference is set
+- Sound feedback on keypress if preference is set
+
+        Settings:
+- Checkbox for keypad vibrate feedback
+- Checkbox for keypad sound feedback
+- Checkbox for keeping screen on
