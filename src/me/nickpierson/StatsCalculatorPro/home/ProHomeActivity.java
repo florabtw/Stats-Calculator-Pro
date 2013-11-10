@@ -4,6 +4,7 @@ import me.nickpierson.StatsCalculator.home.HomeActivity;
 import me.nickpierson.StatsCalculator.home.HomeModel;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,6 +13,8 @@ public class ProHomeActivity extends HomeActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		view = new ProHomeView(this);
 		model = new HomeModel();

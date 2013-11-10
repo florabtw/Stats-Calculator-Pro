@@ -6,6 +6,8 @@ import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class ProBasicActivity extends BasicActivity {
 
@@ -35,5 +37,15 @@ public class ProBasicActivity extends BasicActivity {
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public void keypadPress(View button) {
+		((ProBasicView) view).keypadPress((Button) button);
+	}
+
+	@Override
+	public void backSpace(View button) {
+		((ProBasicView) view).backspace();
 	}
 }
