@@ -7,7 +7,7 @@ import me.nickpierson.StatsCalculator.home.HomePresenterTest;
 import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity;
 import me.nickpierson.StatsCalculatorPro.pc.ProPCActivity;
-import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
+import me.nickpierson.StatsCalculatorPro.settings.SettingsActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +55,6 @@ public class ProHomePresenterTest extends HomePresenterTest {
 
 		listener.getValue().fire();
 
-		verify(activity, times(2)).startActivity(new Intent(activity, ProSettingsActivity.class));
+		verify(activity, times(2)).startActivity(new Intent(activity, SettingsActivity.class));
 	}
 }

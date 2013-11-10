@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.nickpierson.StatsCalculatorPro"
+    android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,7 +16,8 @@
         <activity
             android:name="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:theme="@style/HomeTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +29,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:parentActivityName="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
+            android:theme="@style/NotHomeTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,6 +39,7 @@
             android:name="me.nickpierson.StatsCalculatorPro.pc.ProPCActivity"
             android:label="@string/app_name"
             android:parentActivityName="me.nickpierson.StatsCalculatorPro.home.ProHomeActivity"
+            android:theme="@style/NotHomeTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,15 +48,17 @@
         <activity
             android:name="me.nickpierson.StatsCalculator.reference.BasicReferenceActivity"
             android:label="@string/app_name"
-            android:parentActivityName="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity" >
+            android:parentActivityName="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity"
+            android:theme="@style/NotHomeTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity" />
         </activity>
         <activity
-            android:name="me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity"
-            android:label="@string/app_name" >
-      </activity>
+            android:name="me.nickpierson.StatsCalculatorPro.settings.SettingsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NotHomeTheme" >
+        </activity>
     </application>
 
 </manifest>

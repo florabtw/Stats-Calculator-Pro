@@ -3,7 +3,7 @@ package me.nickpierson.StatsCalculatorPro.pc;
 import me.nickpierson.StatsCalculator.pc.PCModel;
 import me.nickpierson.StatsCalculator.pc.PCPresenter;
 import me.nickpierson.StatsCalculator.pc.PCView;
-import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
+import me.nickpierson.StatsCalculatorPro.settings.SettingsActivity;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -18,7 +18,7 @@ public class ProPCPresenter extends PCPresenter {
 
 			@Override
 			public void fire() {
-				activity.startActivity(new Intent(activity, ProSettingsActivity.class));
+				activity.startActivity(new Intent(activity, SettingsActivity.class));
 			}
 		}, ProPCView.ProTypes.MENU_SETTINGS);
 	}

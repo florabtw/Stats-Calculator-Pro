@@ -4,7 +4,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
-import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
+import me.nickpierson.StatsCalculatorPro.settings.SettingsActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +30,6 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 		listener.getValue().fire();
 
-		verify(activity, times(2)).startActivity(new Intent(activity, ProSettingsActivity.class));
+		verify(activity, times(2)).startActivity(new Intent(activity, SettingsActivity.class));
 	}
 }

@@ -5,7 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import me.nickpierson.StatsCalculator.pc.PCPresenterTest;
-import me.nickpierson.StatsCalculatorPro.settings.ProSettingsActivity;
+import me.nickpierson.StatsCalculatorPro.settings.SettingsActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +43,6 @@ public class ProPCPresenterTest extends PCPresenterTest {
 
 		listener.getValue().fire();
 
-		verify(activity, times(2)).startActivity(new Intent(activity, ProSettingsActivity.class));
+		verify(activity, times(2)).startActivity(new Intent(activity, SettingsActivity.class));
 	}
 }
