@@ -23,10 +23,10 @@ public class ProHomePresenter extends HomePresenter {
 			}
 		}, HomeView.Types.DESCRIPTIVE_BUTTON);
 
-		// TODO: The enum is wrong. It should be pulled into the ProHomeView.
-		// Same for
-		// the other screens. Make sure it isn't doing anything in
-		// StatsCalculator library
+		// TODO: These listeners don't necessarily need to be here.
+		// I was wrong when I first assumed that all activities must be pulled up
+		// from the library. These can actually be pushed back down *somewhat*
+		// just create a method to override.
 		view.addListener(new ActionListener() {
 
 			@Override
