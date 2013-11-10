@@ -9,5 +9,9 @@
         android:defaultValue="false"
         android:key="@string/to_sound"
         android:title="@string/sound_title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/wake_lock"
+        android:title="@string/wake_lock_title" />
 
 </PreferenceScreen>

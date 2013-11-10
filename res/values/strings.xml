@@ -4,8 +4,10 @@
     <string name="app_name">Stats Calculator</string>
     <string name="home_menu_settings">Settings</string>
     <string name="to_vibrate">to_vibrate</string>
-    <string name="vibrate_title">Keypad feedback: vibrate</string>
-    <string name="sound_title">Keypad feedback: sound</string>
     <string name="to_sound">to sound</string>
+    <string name="wake_lock">wake lock</string>
+    <string name="vibrate_title">Keypad Feedback: Vibrate</string>
+    <string name="sound_title">Keypad Feedback: Sound</string>
+    <string name="wake_lock_title">Keep Screen On</string>
 
 </resources>

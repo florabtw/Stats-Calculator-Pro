@@ -14,7 +14,7 @@ public class ProBasicActivity extends BasicActivity {
 
 		view = new ProBasicView(this);
 		model = new BasicModel(this);
-		ProBasicPresenter.create(this, model, view);
+		ProBasicPresenter.create(this, model, (ProBasicView) view);
 
 		setContentView(view.getView());
 	}

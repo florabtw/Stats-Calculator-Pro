@@ -33,6 +33,10 @@ public class ProBasicView extends BasicView {
 		});
 	}
 
+	public void wakeLock() {
+		view.setKeepScreenOn(true);
+	}
+
 	public void keypadPress(Button button) {
 		/* Skips MVP */
 		proKeypadHelper.keypadPress(etInput, button.getText().charAt(0));
