@@ -17,7 +17,7 @@ public class ProBasicView extends BasicView {
 	public ProBasicView(Activity activity) {
 		super(activity);
 
-		proKeypadHelper = new ProKeypadHelper(view);
+		proKeypadHelper = new ProKeypadHelper(activity);
 		ImageButton btnBackspace = (ImageButton) tlKeypad.findViewById(R.id.keypad_backspace);
 
 		proKeypadHelper.disableSoftInputFromAppearing(etInput);

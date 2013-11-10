@@ -15,7 +15,7 @@ public class ProPCView extends PCView {
 	public ProPCView(Activity activity) {
 		super(activity);
 
-		proKeypadHelper = new ProKeypadHelper(view);
+		proKeypadHelper = new ProKeypadHelper(activity);
 
 		proKeypadHelper.disableSoftInputFromAppearing(etNVal);
 		proKeypadHelper.disableSoftInputFromAppearing(etRVal);

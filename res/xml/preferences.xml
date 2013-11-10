@@ -5,5 +5,9 @@
         android:defaultValue="false"
         android:key="@string/to_vibrate"
         android:title="@string/vibrate_title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/to_sound"
+        android:title="@string/sound_title" />
 
 </PreferenceScreen>
