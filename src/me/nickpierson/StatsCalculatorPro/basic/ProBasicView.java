@@ -1,6 +1,7 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
+import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.ImageButton;
 
 import com.nickpierson.me.StatsCalculator.R;
 
-public class ProBasicView extends BasicView {
+public class ProBasicView extends BasicView implements IHelperView {
 
 	ProKeypadHelper proKeypadHelper;
 
@@ -46,4 +47,5 @@ public class ProBasicView extends BasicView {
 		/* Skips MVP */
 		proKeypadHelper.backspace(etInput);
 	}
+
 }
