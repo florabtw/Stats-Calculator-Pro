@@ -1,10 +1,11 @@
-package me.nickpierson.StatsCalculatorPro;
+package me.nickpierson.StatsCalculatorPro.home;
 
-import me.nickpierson.StatsCalculator.HomeModel;
-import me.nickpierson.StatsCalculator.HomePresenter;
-import me.nickpierson.StatsCalculator.HomeView;
+import me.nickpierson.StatsCalculator.home.HomeModel;
+import me.nickpierson.StatsCalculator.home.HomePresenter;
+import me.nickpierson.StatsCalculator.home.HomeView;
 import me.nickpierson.StatsCalculatorPro.basic.ProBasicActivity;
 import me.nickpierson.StatsCalculatorPro.pc.ProPCActivity;
+import me.nickpierson.StatsCalculatorPro.settings.SettingsActivity;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -22,6 +23,10 @@ public class ProHomePresenter extends HomePresenter {
 			}
 		}, HomeView.Types.DESCRIPTIVE_BUTTON);
 
+		// TODO: These listeners don't necessarily need to be here.
+		// I was wrong when I first assumed that all activities must be pulled up
+		// from the library. These can actually be pushed back down *somewhat*
+		// just create a method to override.
 		view.addListener(new ActionListener() {
 
 			@Override
@@ -29,6 +34,14 @@ public class ProHomePresenter extends HomePresenter {
 				activity.startActivity(new Intent(activity, ProPCActivity.class));
 			}
 		}, HomeView.Types.PERM_COMB_BUTTON);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				activity.startActivity(new Intent(activity, SettingsActivity.class));
+			}
+		}, ProHomeView.ProTypes.MENU_SETTINGS);
 	}
 
 }
