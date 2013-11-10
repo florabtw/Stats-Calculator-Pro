@@ -12,10 +12,6 @@ public class ProPCView extends PCView {
 
 	ProKeypadHelper proKeypadHelper;
 
-	public enum ProTypes {
-		MENU_SETTINGS;
-	}
-
 	public ProPCView(Activity activity) {
 		super(activity);
 
@@ -36,10 +32,6 @@ public class ProPCView extends PCView {
 				return true;
 			}
 		});
-	}
-
-	public void menuSettings() {
-		event(ProTypes.MENU_SETTINGS);
 	}
 
 	public void keypadPress(Button button) {

@@ -2,10 +2,7 @@ package me.nickpierson.StatsCalculatorPro.pc;
 
 import me.nickpierson.StatsCalculator.pc.PCActivity;
 import me.nickpierson.StatsCalculator.pc.PCModel;
-import me.nickpierson.StatsCalculatorPro.R;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,23 +17,6 @@ public class ProPCActivity extends PCActivity {
 		ProPCPresenter.create(this, model, view);
 
 		setContentView(view.getView());
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.pro_menu, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		if (itemId == R.id.home_settings) {
-			((ProPCView) view).menuSettings();
-			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
-		}
 	}
 
 	@Override

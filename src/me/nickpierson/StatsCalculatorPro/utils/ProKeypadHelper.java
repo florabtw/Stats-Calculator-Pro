@@ -25,4 +25,13 @@ public class ProKeypadHelper extends KeypadHelper {
 
 		super.keypadPress(etInput, character);
 	}
+
+	@Override
+	public void backspace(EditText etInput) {
+		if (vibrateFeedback) {
+			etInput.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+		}
+
+		super.backspace(etInput);
+	}
 }

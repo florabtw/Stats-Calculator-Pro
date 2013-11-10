@@ -4,6 +4,6 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="@string/to_vibrate"
-        android:title="Keypad feedback: vibrate" />
+        android:title="@string/vibrate_title" />
 
 </PreferenceScreen>

@@ -14,10 +14,6 @@ public class ProBasicView extends BasicView {
 
 	ProKeypadHelper proKeypadHelper;
 
-	public enum ProTypes {
-		MENU_SETTINGS;
-	}
-
 	public ProBasicView(Activity activity) {
 		super(activity);
 
@@ -35,10 +31,6 @@ public class ProBasicView extends BasicView {
 				return true;
 			}
 		});
-	}
-
-	public void menuSettings() {
-		event(ProTypes.MENU_SETTINGS);
 	}
 
 	public void keypadPress(Button button) {
