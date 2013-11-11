@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -34,5 +35,12 @@ public class ProBasicModelTest extends BasicModelTest {
 		assertTrue(Double.isNaN(testResults.get(ProConstants.STD_ERROR)));
 		assertTrue(Double.isNaN(testResults.get(ProConstants.SUM_SQRS)));
 		assertTrue(Double.isNaN(testResults.get(ProConstants.RMS)));
+	}
+
+	@Test
+	public void standardErrorIsCalculatedCorrectly() {
+		HashMap<String, Double> testResults = proModel.calculateResults(makeValidList(36.9, 32.228, 39.01, 37.65));
+
+		assertEquals(1.47256431665, testResults.get(ProConstants.STD_ERROR), DELTA);
 	}
 }
