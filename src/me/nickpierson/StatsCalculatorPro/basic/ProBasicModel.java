@@ -34,6 +34,7 @@ public class ProBasicModel extends BasicModel {
 
 		results.put(ProConstants.STD_ERROR, sampleDev / Math.sqrt(size));
 		results.put(ProConstants.SUM_SQRS, calculateSumOfSquares(numberList, mean));
+		results.put(ProConstants.RMS, calculateRootMeanSquare(numberList));
 
 		return results;
 	}
@@ -45,5 +46,14 @@ public class ProBasicModel extends BasicModel {
 		}
 
 		return result;
+	}
+
+	private double calculateRootMeanSquare(List<Double> numberList) {
+		double squaresSummed = 0;
+		for (double number : numberList) {
+			squaresSummed += Math.pow(number, 2);
+		}
+
+		return Math.sqrt(squaresSummed / numberList.size());
 	}
 }

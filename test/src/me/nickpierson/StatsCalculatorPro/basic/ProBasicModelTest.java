@@ -43,5 +43,6 @@ public class ProBasicModelTest extends BasicModelTest {
 
 		assertEquals(1.472564, testResults.get(ProConstants.STD_ERROR), DELTA);
 		assertEquals(26.021347, testResults.get(ProConstants.SUM_SQRS), DELTA);
+		assertEquals(36.536134, testResults.get(ProConstants.RMS), DELTA);
 	}
 }
