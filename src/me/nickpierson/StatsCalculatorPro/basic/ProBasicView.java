@@ -2,6 +2,7 @@ package me.nickpierson.StatsCalculatorPro.basic;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
+import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.View;
@@ -17,6 +18,8 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public ProBasicView(Activity activity) {
 		super(activity);
+
+		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
 		ImageButton btnBackspace = (ImageButton) tlKeypad.findViewById(R.id.keypad_backspace);
