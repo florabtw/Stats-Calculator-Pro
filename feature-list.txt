@@ -1,5 +1,6 @@
         Descriptive:
 - Screen stays on if preference is set
+- Additional calculations: Root Mean Square, SST, and Standard Error of Mean
 
         Perm & Comb:
 - Screen stays on if preference is set
