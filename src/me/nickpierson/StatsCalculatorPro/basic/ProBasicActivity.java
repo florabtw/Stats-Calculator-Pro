@@ -1,7 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
 import me.nickpierson.StatsCalculator.basic.BasicActivity;
-import me.nickpierson.StatsCalculator.basic.BasicModel;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,7 @@ public class ProBasicActivity extends BasicActivity {
 		super.onCreate(savedInstanceState);
 
 		view = new ProBasicView(this);
-		model = new BasicModel(this);
+		model = new ProBasicModel(this);
 		ProBasicPresenter.create(this, model, (ProBasicView) view);
 
 		setContentView(view.getView());
