@@ -30,9 +30,20 @@ public class ProBasicModel extends BasicModel {
 
 		double size = results.get(MyConstants.SIZE);
 		double sampleDev = results.get(MyConstants.SAMPLE_DEV);
+		double mean = results.get(MyConstants.ARITH_MEAN);
 
 		results.put(ProConstants.STD_ERROR, sampleDev / Math.sqrt(size));
+		results.put(ProConstants.SUM_SQRS, calculateSumOfSquares(numberList, mean));
 
 		return results;
+	}
+
+	private double calculateSumOfSquares(List<Double> numberList, double mean) {
+		double result = 0;
+		for (double number : numberList) {
+			result += Math.pow(mean - number, 2);
+		}
+
+		return result;
 	}
 }

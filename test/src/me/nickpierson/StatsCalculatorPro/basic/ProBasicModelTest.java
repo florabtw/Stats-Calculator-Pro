@@ -38,9 +38,10 @@ public class ProBasicModelTest extends BasicModelTest {
 	}
 
 	@Test
-	public void standardErrorIsCalculatedCorrectly() {
+	public void additionalCalculationsAreCorrect() {
 		HashMap<String, Double> testResults = proModel.calculateResults(makeValidList(36.9, 32.228, 39.01, 37.65));
 
-		assertEquals(1.47256431665, testResults.get(ProConstants.STD_ERROR), DELTA);
+		assertEquals(1.472564, testResults.get(ProConstants.STD_ERROR), DELTA);
+		assertEquals(26.021347, testResults.get(ProConstants.SUM_SQRS), DELTA);
 	}
 }
