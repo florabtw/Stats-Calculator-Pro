@@ -2,22 +2,34 @@ package me.nickpierson.StatsCalculatorPro.basic;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
+import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-import com.nickpierson.me.StatsCalculator.R;
+import android.widget.RelativeLayout;
 
 public class ProBasicView extends BasicView implements IHelperView {
 
 	ProKeypadHelper proKeypadHelper;
+	private RelativeLayout proView;
 
 	public ProBasicView(Activity activity) {
 		super(activity);
+
+		proView = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
+
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 0);
+		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.ABOVE, R.id.basic_controller);
+
+		flFrame.removeAllViews();
+		proView.addView(lvResults, 0, params);
+		flFrame.addView(proView);
 
 		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
 
@@ -35,6 +47,12 @@ public class ProBasicView extends BasicView implements IHelperView {
 				return true;
 			}
 		});
+	}
+
+	@Override
+	public void showResults() {
+		flFrame.removeAllViews();
+		flFrame.addView(proView);
 	}
 
 	public void wakeLock() {
