@@ -23,9 +23,14 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 		proView = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
 
+		/*
+		 * Align with parent top. Put above the 'controller' and align with
+		 * parent (bottom) if 'controller' is missing
+		 */
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 0);
 		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 		params.addRule(RelativeLayout.ABOVE, R.id.basic_controller);
+		params.alignWithParent = true;
 
 		flFrame.removeAllViews();
 		proView.addView(lvResults, 0, params);
