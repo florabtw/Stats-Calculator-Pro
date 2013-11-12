@@ -16,12 +16,12 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	ProKeypadHelper proKeypadHelper;
-	private RelativeLayout proView;
+	private RelativeLayout proResults;
 
 	public ProBasicView(Activity activity) {
 		super(activity);
 
-		proView = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
+		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -32,9 +32,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		params.addRule(RelativeLayout.ABOVE, R.id.basic_controller);
 		params.alignWithParent = true;
 
-		flFrame.removeAllViews();
-		proView.addView(lvResults, 0, params);
-		flFrame.addView(proView);
+		proResults.addView(lvResults, 0, params);
 
 		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
 
@@ -57,7 +55,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 	@Override
 	public void showResults() {
 		flFrame.removeAllViews();
-		flFrame.addView(proView);
+		flFrame.addView(proResults);
 	}
 
 	public void wakeLock() {
