@@ -9,5 +9,9 @@
     <string name="vibrate_title">Keypad Feedback: Vibrate</string>
     <string name="sound_title">Keypad Feedback: Sound</string>
     <string name="wake_lock_title">Keep Screen On</string>
+    <string name="up_arrow_desc">up arrow</string>
+    <string name="down_arrow_desc">down arrow</string>
+    <string name="remove_desc">remove list item</string>
+    <string name="about_desc">about list item</string>
 
 </resources>
