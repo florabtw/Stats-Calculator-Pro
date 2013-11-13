@@ -1,6 +1,7 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
@@ -9,8 +10,11 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class ProBasicView extends BasicView implements IHelperView {
@@ -34,7 +38,12 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 		proResults.addView(lvResults, 0, params);
 
+		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
+		resultsAdapter.addAll(Constants.BASIC_TITLES);
 		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
+
+		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		lvResults.setAdapter(resultsAdapter);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
 		ImageButton btnBackspace = (ImageButton) tlKeypad.findViewById(R.id.keypad_backspace);
@@ -48,6 +57,13 @@ public class ProBasicView extends BasicView implements IHelperView {
 			public boolean onLongClick(View v) {
 				proKeypadHelper.longPressBackspace(etInput);
 				return true;
+			}
+		});
+
+		lvResults.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
 			}
 		});
 	}

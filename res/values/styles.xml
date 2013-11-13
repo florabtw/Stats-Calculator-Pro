@@ -8,4 +8,8 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="list_item">
+        <item name="android:background">@drawable/list_item_selector</item>
+    </style>
+
 </resources>
