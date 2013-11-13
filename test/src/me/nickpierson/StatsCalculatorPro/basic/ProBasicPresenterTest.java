@@ -95,4 +95,35 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 		verify(proView).setSelectedPosition(3);
 	}
+
+	@Test
+	public void whenANewListItemIsSelectedAndTheControllerIsAlreadyShown_ThenAdapterShouldSaveNewPosition() {
+		when(proView.getSelectedPosition()).thenReturn(2);
+		HashMap<Enum<?>, Integer> testMap = new HashMap<Enum<?>, Integer>();
+		testMap.put(ProBasicView.ProTypes.ITEM_CLICK, 3);
+		createPresenter();
+
+		verify(proView).addListener(dataListener.capture(), eq(ProBasicView.ProTypes.ITEM_CLICK));
+
+		dataListener.getValue().fire(testMap);
+
+		verify(proView).setSelectedPosition(3);
+		verify(proView, never()).showController();
+	}
+
+	@Test
+	public void whenAListItemIsClickedAndAlreadySelected_ThenTheControllerShouldHideAndAdapterClearSavedPosition() {
+		when(proView.getSelectedPosition()).thenReturn(3);
+		HashMap<Enum<?>, Integer> testMap = new HashMap<Enum<?>, Integer>();
+		testMap.put(ProBasicView.ProTypes.ITEM_CLICK, 3);
+		createPresenter();
+
+		verify(proView).addListener(dataListener.capture(), eq(ProBasicView.ProTypes.ITEM_CLICK));
+
+		dataListener.getValue().fire(testMap);
+
+		verify(proView).clearChoices();
+		verify(proView).setSelectedPosition(-1);
+		verify(proView).hideController();
+	}
 }

@@ -22,10 +22,18 @@ public class ProBasicPresenter extends BasicPresenter {
 
 			@Override
 			public void fire(HashMap<Enum<?>, ?> data) {
+				int oldPosition = view.getSelectedPosition();
 				int newPosition = (Integer) data.get(ProBasicView.ProTypes.ITEM_CLICK);
-				if (view.getSelectedPosition() == -1) {
+
+				if (oldPosition == -1) {
 					view.showController();
 					view.setSelectedPosition(newPosition);
+				} else if (oldPosition != newPosition) {
+					view.setSelectedPosition(newPosition);
+				} else {
+					view.setSelectedPosition(-1);
+					view.clearChoices();
+					view.hideController();
 				}
 			}
 		}, ProBasicView.ProTypes.ITEM_CLICK);

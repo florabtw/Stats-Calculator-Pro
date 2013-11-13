@@ -90,12 +90,20 @@ public class ProBasicView extends BasicView implements IHelperView {
 		controller.setVisibility(View.VISIBLE);
 	}
 
+	public void hideController() {
+		controller.setVisibility(View.GONE);
+	}
+
 	public void setSelectedPosition(int pos) {
 		((ProBasicAdapter) resultsAdapter).setSelectedPos(pos);
 	}
 
 	public int getSelectedPosition() {
 		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
+	}
+
+	public void clearChoices() {
+		lvResults.clearChoices();
 	}
 
 	public void wakeLock() {
