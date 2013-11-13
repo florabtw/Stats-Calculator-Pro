@@ -1,5 +1,7 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.HashMap;
+
 import me.nickpierson.StatsCalculator.basic.BasicView;
 import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
@@ -14,18 +16,25 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class ProBasicView extends BasicView implements IHelperView {
 
+	public enum ProTypes {
+		ITEM_CLICK;
+	}
+
 	ProKeypadHelper proKeypadHelper;
 	private RelativeLayout proResults;
+	private LinearLayout controller;
 
 	public ProBasicView(Activity activity) {
 		super(activity);
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
+		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -64,6 +73,9 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
+				HashMap<Enum<?>, Integer> map = new HashMap<Enum<?>, Integer>();
+				map.put(ProTypes.ITEM_CLICK, pos);
+				dataEvent(ProTypes.ITEM_CLICK, map);
 			}
 		});
 	}
@@ -72,6 +84,18 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public void showResults() {
 		flFrame.removeAllViews();
 		flFrame.addView(proResults);
+	}
+
+	public void showController() {
+		controller.setVisibility(View.VISIBLE);
+	}
+
+	public void setSelectedPosition(int pos) {
+		((ProBasicAdapter) resultsAdapter).setSelectedPos(pos);
+	}
+
+	public int getSelectedPosition() {
+		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
 	}
 
 	public void wakeLock() {

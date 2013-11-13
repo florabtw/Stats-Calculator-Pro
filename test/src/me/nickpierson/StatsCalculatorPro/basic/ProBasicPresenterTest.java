@@ -1,9 +1,13 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
 import me.nickpierson.StatsCalculatorPro.R;
 
@@ -26,12 +30,20 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	private static final String WAKE_LOCK = "wake lock";
 
+	private SharedPreferences sharedPref;
+
 	@Override
 	@Before
 	public void setup() {
 		super.setup();
 
 		proView = mock(ProBasicView.class);
+
+		Context context = Robolectric.application.getApplicationContext();
+		when(activity.getApplicationContext()).thenReturn(context);
+		when(activity.getString(R.string.wake_lock)).thenReturn(WAKE_LOCK);
+
+		sharedPref = ShadowPreferenceManager.getDefaultSharedPreferences(context);
 	}
 
 	public void createPresenter() {
@@ -40,10 +52,6 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	@Test
 	public void whenPresenterIsCreated_ViewIsToldToKeepScreenOnIfPreferenceIsSet() {
-		Context context = Robolectric.application.getApplicationContext();
-		when(activity.getApplicationContext()).thenReturn(context);
-		when(activity.getString(R.string.wake_lock)).thenReturn(WAKE_LOCK);
-		SharedPreferences sharedPref = ShadowPreferenceManager.getDefaultSharedPreferences(context);
 		sharedPref.edit().putBoolean(WAKE_LOCK, true).commit();
 
 		createPresenter();
@@ -53,14 +61,38 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	@Test
 	public void whenPresenterIsCreated_ViewIsNeverToldToKeepScreenOnIfPreferenceIsNotSet() {
-		Context context = Robolectric.application.getApplicationContext();
-		when(activity.getApplicationContext()).thenReturn(context);
-		when(activity.getString(R.string.wake_lock)).thenReturn(WAKE_LOCK);
-		SharedPreferences sharedPref = ShadowPreferenceManager.getDefaultSharedPreferences(context);
 		sharedPref.edit().putBoolean(WAKE_LOCK, false).commit();
 
 		createPresenter();
 
 		verify(proView, never()).wakeLock();
+	}
+
+	@Test
+	public void whenAListItemIsSelectedAndControllerIsNotShown_ThenTheControllerShouldAppear() {
+		when(proView.getSelectedPosition()).thenReturn(-1);
+		HashMap<Enum<?>, Integer> testMap = new HashMap<Enum<?>, Integer>();
+		testMap.put(ProBasicView.ProTypes.ITEM_CLICK, 3);
+		createPresenter();
+
+		verify(proView).addListener(dataListener.capture(), eq(ProBasicView.ProTypes.ITEM_CLICK));
+
+		dataListener.getValue().fire(testMap);
+
+		verify(proView).showController();
+	}
+
+	@Test
+	public void whenAListItemIsSelectedAndControllerIsNotShown_ThenAdapterShouldSaveSelectedPosition() {
+		when(proView.getSelectedPosition()).thenReturn(-1);
+		HashMap<Enum<?>, Integer> testMap = new HashMap<Enum<?>, Integer>();
+		testMap.put(ProBasicView.ProTypes.ITEM_CLICK, 3);
+		createPresenter();
+
+		verify(proView).addListener(dataListener.capture(), eq(ProBasicView.ProTypes.ITEM_CLICK));
+
+		dataListener.getValue().fire(testMap);
+
+		verify(proView).setSelectedPosition(3);
 	}
 }
