@@ -57,10 +57,17 @@ public class ProBasicModel extends BasicModel {
 		return Math.sqrt(squaresSummed / numberList.size());
 	}
 
-	public String[] moveItemUp(int position, String[] items) {
-		String temp = items[position - 1];
-		items[position - 1] = items[position];
-		items[position] = temp;
-		return items;
+	public void moveItemUp(int position, String[] items) {
+		swap(items, position, position - 1);
+	}
+
+	public void moveItemDown(int position, String[] items) {
+		swap(items, position, position + 1);
+	}
+
+	private void swap(String[] array, int pos1, int pos2) {
+		String temp = array[pos1];
+		array[pos1] = array[pos2];
+		array[pos2] = temp;
 	}
 }

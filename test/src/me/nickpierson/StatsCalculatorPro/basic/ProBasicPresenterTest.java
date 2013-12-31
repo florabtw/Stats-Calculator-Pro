@@ -134,10 +134,8 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	public void whenMoveUpButtonIsClicked_ThenCurrentSelectedItemShouldMoveUp() {
 		int testPos = 1;
 		String[] testItems = { "First", "Second", "Third" };
-		String[] expectedItems = { "Second", "First", "Third" };
 		when(proView.getSelectedPosition()).thenReturn(testPos);
 		when(proView.getAllItems()).thenReturn(testItems);
-		when(proModel.moveItemUp(testPos, testItems)).thenReturn(expectedItems);
 		createPresenter();
 
 		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
@@ -145,7 +143,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		listener.getValue().fire();
 
 		verify(proModel).moveItemUp(testPos, testItems);
-		verify(proView).replaceItems(expectedItems);
+		verify(proView).replaceItems(testItems);
 		verify(proView).highlightAndSelect(testPos - 1);
 	}
 
@@ -163,16 +161,20 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 
-	// @Test
-	// public void
-	// whenMovedDownButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
-	// createPresenter();
-	//
-	// verify(proView).addListener(listener.capture(),
-	// eq(ProBasicView.ProTypes.MOVE_DOWN));
-	//
-	// listener.getValue().fire();
-	//
-	// verify(proView).moveSelectedItemDown();
-	// }
+	@Test
+	public void whenMovedDownButtonIsClicked_ThenCurrentSelectedItemShouldMoveDown() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel).moveItemDown(testPos, testItems);
+		verify(proView).replaceItems(testItems);
+		verify(proView).highlightAndSelect(testPos + 1);
+	}
 }

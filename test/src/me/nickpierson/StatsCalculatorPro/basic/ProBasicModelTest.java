@@ -1,6 +1,8 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
@@ -51,8 +53,19 @@ public class ProBasicModelTest extends BasicModelTest {
 		String[] testItems = { "First", "Second", "Third" };
 		String[] expectedOutput = { "Second", "First", "Third" };
 
-		String[] actualOutput = proModel.moveItemUp(testPos, testItems);
+		proModel.moveItemUp(testPos, testItems);
 
-		assertArrayEquals(expectedOutput, actualOutput);
+		assertArrayEquals(expectedOutput, testItems);
+	}
+
+	@Test
+	public void moveItemDown_ReturnsDesiredItemMovedDownByOne() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		String[] expectedOutput = { "First", "Third", "Second" };
+
+		proModel.moveItemDown(testPos, testItems);
+
+		assertArrayEquals(expectedOutput, testItems);
 	}
 }

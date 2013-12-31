@@ -19,7 +19,6 @@ public class ProBasicPresenter extends BasicPresenter {
 		handleWakeLock(activity, view);
 
 		view.addListener(new DataActionListener() {
-
 			@Override
 			public void fire(HashMap<Enum<?>, ?> data) {
 				int oldPosition = view.getSelectedPosition();
@@ -39,18 +38,28 @@ public class ProBasicPresenter extends BasicPresenter {
 		}, ProBasicView.ProTypes.ITEM_CLICK);
 
 		view.addListener(new ActionListener() {
-
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
 				if (currPos != 0) {
 					String[] currItems = view.getAllItems();
-					String[] newItems = model.moveItemUp(currPos, currItems);
-					view.replaceItems(newItems);
+					model.moveItemUp(currPos, currItems);
+					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos - 1);
 				}
 			}
 		}, ProBasicView.ProTypes.MOVE_UP);
+
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				String[] currItems = view.getAllItems();
+				model.moveItemDown(currPos, currItems);
+				view.replaceItems(currItems);
+				view.highlightAndSelect(currPos + 1);
+			}
+		}, ProBasicView.ProTypes.MOVE_DOWN);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {
