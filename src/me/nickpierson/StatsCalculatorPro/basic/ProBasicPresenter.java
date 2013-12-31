@@ -7,6 +7,7 @@ import me.nickpierson.StatsCalculator.basic.BasicPresenter;
 import me.nickpierson.StatsCalculatorPro.ProHelper;
 import android.app.Activity;
 
+import com.thecellutioncenter.mvplib.ActionListener;
 import com.thecellutioncenter.mvplib.DataActionListener;
 
 public class ProBasicPresenter extends BasicPresenter {
@@ -37,6 +38,22 @@ public class ProBasicPresenter extends BasicPresenter {
 				}
 			}
 		}, ProBasicView.ProTypes.ITEM_CLICK);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				view.moveSelectedItemUp();
+			}
+		}, ProBasicView.ProTypes.MOVE_UP);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				view.moveSelectedItemDown();
+			}
+		}, ProBasicView.ProTypes.MOVE_DOWN);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {

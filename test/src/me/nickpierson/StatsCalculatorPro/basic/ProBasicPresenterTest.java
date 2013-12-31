@@ -126,4 +126,26 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).setSelectedPosition(-1);
 		verify(proView).hideController();
 	}
+
+	@Test
+	public void whenMoveUpButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
+
+		listener.getValue().fire();
+
+		verify(proView).moveSelectedItemUp();
+	}
+
+	@Test
+	public void whenMovedDownButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proView).moveSelectedItemDown();
+	}
 }

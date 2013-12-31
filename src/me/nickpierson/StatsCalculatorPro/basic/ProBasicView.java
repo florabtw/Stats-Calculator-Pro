@@ -138,4 +138,14 @@ public class ProBasicView extends BasicView implements IHelperView {
 		/* Skips MVP */
 		proKeypadHelper.backspace(etInput);
 	}
+
+	public void moveSelectedItemUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void moveSelectedItemDown() {
+		// TODO Auto-generated method stub
+		
+	}
 }
