@@ -11,6 +11,7 @@ import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,7 +24,7 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -35,6 +36,8 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
+		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.basic_btnMoveUp);
+		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.basic_btnMoveDown);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -76,6 +79,22 @@ public class ProBasicView extends BasicView implements IHelperView {
 				HashMap<Enum<?>, Integer> map = new HashMap<Enum<?>, Integer>();
 				map.put(ProTypes.ITEM_CLICK, pos);
 				dataEvent(ProTypes.ITEM_CLICK, map);
+			}
+		});
+
+		btnMoveUp.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				event(ProTypes.MOVE_UP);
+			}
+		});
+
+		btnMoveDown.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				event(ProTypes.MOVE_DOWN);
 			}
 		});
 	}
