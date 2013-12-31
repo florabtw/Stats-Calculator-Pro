@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	ProBasicView proView;
+	ProBasicModel proModel;
 
 	private static final String WAKE_LOCK = "wake lock";
 
@@ -38,6 +39,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		super.setup();
 
 		proView = mock(ProBasicView.class);
+		proModel = mock(ProBasicModel.class);
 
 		Context context = Robolectric.application.getApplicationContext();
 		when(activity.getApplicationContext()).thenReturn(context);
@@ -47,7 +49,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	}
 
 	public void createPresenter() {
-		ProBasicPresenter.create(activity, model, proView);
+		ProBasicPresenter.create(activity, proModel, proView);
 	}
 
 	@Test
@@ -128,24 +130,31 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	}
 
 	@Test
-	public void whenMoveUpButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
+	public void whenMoveUpButtonIsClicked_ThenCurrentSelectedItemShouldMoveUp() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		String[] expectedItems = { "Second", "First", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		when(proModel.moveItemUp(testPos, testItems)).thenReturn(expectedItems);
 		createPresenter();
 
 		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
 
 		listener.getValue().fire();
 
-		verify(proView).moveSelectedItemUp();
+		verify(proModel).moveItemUp(testPos, testItems);
+		verify(proView).replaceItems(expectedItems);
 	}
 
-	@Test
-	public void whenMovedDownButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
-		createPresenter();
-
-		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
-
-		listener.getValue().fire();
-
-		verify(proView).moveSelectedItemDown();
-	}
+//	@Test
+//	public void whenMovedDownButtonIsClicked_ThenViewShouldBeToldToMoveSelectedItemUp() {
+//		createPresenter();
+//
+//		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+//
+//		listener.getValue().fire();
+//
+//		verify(proView).moveSelectedItemDown();
+//	}
 }

@@ -2,7 +2,6 @@ package me.nickpierson.StatsCalculatorPro.basic;
 
 import java.util.HashMap;
 
-import me.nickpierson.StatsCalculator.basic.BasicModel;
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
 import me.nickpierson.StatsCalculatorPro.ProHelper;
 import android.app.Activity;
@@ -14,7 +13,7 @@ public class ProBasicPresenter extends BasicPresenter {
 
 	static ProHelper proHelper = new ProHelper();
 
-	public static void create(final Activity activity, final BasicModel model, final ProBasicView view) {
+	public static void create(final Activity activity, final ProBasicModel model, final ProBasicView view) {
 		setup(activity, model, view);
 
 		handleWakeLock(activity, view);
@@ -43,17 +42,12 @@ public class ProBasicPresenter extends BasicPresenter {
 
 			@Override
 			public void fire() {
-				view.moveSelectedItemUp();
+				int currPos = view.getSelectedPosition();
+				String[] currItems = view.getAllItems();
+				String[] newItems = model.moveItemUp(currPos, currItems);
+				view.replaceItems(newItems);
 			}
 		}, ProBasicView.ProTypes.MOVE_UP);
-
-		view.addListener(new ActionListener() {
-
-			@Override
-			public void fire() {
-				view.moveSelectedItemDown();
-			}
-		}, ProBasicView.ProTypes.MOVE_DOWN);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {

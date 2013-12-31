@@ -56,4 +56,9 @@ public class ProBasicModel extends BasicModel {
 
 		return Math.sqrt(squaresSummed / numberList.size());
 	}
+
+	public String[] moveItemUp(int testPos, String[] testItems) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

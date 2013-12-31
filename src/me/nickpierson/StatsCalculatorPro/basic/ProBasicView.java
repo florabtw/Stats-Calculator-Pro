@@ -121,6 +121,21 @@ public class ProBasicView extends BasicView implements IHelperView {
 		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
 	}
 
+	public String[] getAllItems() {
+		int count = resultsAdapter.getCount();
+		String[] result = new String[count];
+		for (int i = 0; i < count; i++) {
+			result[i] = resultsAdapter.getItem(i);
+		}
+
+		return result;
+	}
+
+	public void replaceItems(String[] items) {
+		resultsAdapter.clear();
+		resultsAdapter.addAll(items);
+	}
+
 	public void clearChoices() {
 		lvResults.clearChoices();
 	}
@@ -137,15 +152,5 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public void backspace() {
 		/* Skips MVP */
 		proKeypadHelper.backspace(etInput);
-	}
-
-	public void moveSelectedItemUp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void moveSelectedItemDown() {
-		// TODO Auto-generated method stub
-		
 	}
 }
