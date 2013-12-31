@@ -177,4 +177,20 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).replaceItems(testItems);
 		verify(proView).highlightAndSelect(testPos + 1);
 	}
+
+	@Test
+	public void whenMoveDownButtonIsClickedWhenBottomItemIsSelected_ThenNothingShouldHappen() {
+		String[] testItems = { "First", "Second", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(2);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemDown(any(Integer.class), any(String[].class));
+		verify(proView, never()).replaceItems(any(String[].class));
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
 }

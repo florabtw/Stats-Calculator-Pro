@@ -55,9 +55,11 @@ public class ProBasicPresenter extends BasicPresenter {
 			public void fire() {
 				int currPos = view.getSelectedPosition();
 				String[] currItems = view.getAllItems();
-				model.moveItemDown(currPos, currItems);
-				view.replaceItems(currItems);
-				view.highlightAndSelect(currPos + 1);
+				if (currPos != currItems.length - 1) {
+					model.moveItemDown(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos + 1);
+				}
 			}
 		}, ProBasicView.ProTypes.MOVE_DOWN);
 	}
