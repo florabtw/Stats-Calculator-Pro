@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -145,6 +146,19 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 		verify(proModel).moveItemUp(testPos, testItems);
 		verify(proView).replaceItems(expectedItems);
+	}
+	
+	@Test
+	public void whenMoveUpButtonIsClickedWhenTopItemIsSelected_ThenNothingShouldHappen() {
+		when(proView.getSelectedPosition()).thenReturn(0);
+		createPresenter();
+		
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
+		
+		listener.getValue().fire();
+		
+		verify(proModel, never()).moveItemUp(any(Integer.class), any(String[].class));
+		verify(proView, never()).replaceItems(any(String[].class));
 	}
 
 //	@Test
