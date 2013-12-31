@@ -120,6 +120,11 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public int getSelectedPosition() {
 		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
 	}
+	
+	public void highlightAndSelect(int pos) {
+		setSelectedPosition(pos);
+		lvResults.setItemChecked(pos, true);
+	}
 
 	public String[] getAllItems() {
 		int count = resultsAdapter.getCount();

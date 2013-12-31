@@ -47,6 +47,7 @@ public class ProBasicPresenter extends BasicPresenter {
 					String[] currItems = view.getAllItems();
 					String[] newItems = model.moveItemUp(currPos, currItems);
 					view.replaceItems(newItems);
+					view.highlightAndSelect(currPos - 1);
 				}
 			}
 		}, ProBasicView.ProTypes.MOVE_UP);
