@@ -23,7 +23,7 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -143,6 +143,10 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
+	}
+
+	public void menuListReset() {
+		event(ProTypes.MENU_RESET_LIST);
 	}
 
 	public void keypadPress(Button button) {

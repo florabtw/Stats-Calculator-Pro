@@ -6,9 +6,12 @@ import java.util.Collections;
 
 import me.nickpierson.StatsCalculator.basic.BasicActivity;
 import me.nickpierson.StatsCalculator.utils.Constants;
+import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -59,6 +62,23 @@ public class ProBasicActivity extends BasicActivity {
 
 		editor.putString(RESULTS_KEY, builder.toString());
 		editor.commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.pro_basic, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.menu_basic_reset) {
+			((ProBasicView) view).menuListReset();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
