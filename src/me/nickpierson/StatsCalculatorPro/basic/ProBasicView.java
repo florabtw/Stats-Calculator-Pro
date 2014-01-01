@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
@@ -29,7 +30,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 	private RelativeLayout proResults;
 	private LinearLayout controller;
 
-	public ProBasicView(Activity activity, String[] results) {
+	public ProBasicView(Activity activity, ArrayList<String> results) {
 		super(activity);
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
@@ -122,19 +123,18 @@ public class ProBasicView extends BasicView implements IHelperView {
 		lvResults.setItemChecked(pos, true);
 	}
 
-	public String[] getAllItems() {
-		int count = resultsAdapter.getCount();
-		String[] result = new String[count];
-		for (int i = 0; i < count; i++) {
-			result[i] = resultsAdapter.getItem(i);
+	public ArrayList<String> getAllItems() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (int i = 0; i < resultsAdapter.getCount(); i++) {
+			result.add(resultsAdapter.getItem(i));
 		}
 
 		return result;
 	}
 
-	public void replaceItems(String[] items) {
+	public void replaceItems(ArrayList<String> currItems) {
 		resultsAdapter.clear();
-		resultsAdapter.addAll(items);
+		resultsAdapter.addAll(currItems);
 	}
 
 	public void clearChoices() {

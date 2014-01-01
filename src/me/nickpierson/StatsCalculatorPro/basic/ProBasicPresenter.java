@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
@@ -42,7 +43,7 @@ public class ProBasicPresenter extends BasicPresenter {
 			public void fire() {
 				int currPos = view.getSelectedPosition();
 				if (currPos != 0) {
-					String[] currItems = view.getAllItems();
+					ArrayList<String> currItems = view.getAllItems();
 					model.moveItemUp(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos - 1);
@@ -54,8 +55,8 @@ public class ProBasicPresenter extends BasicPresenter {
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
-				String[] currItems = view.getAllItems();
-				if (currPos != currItems.length - 1) {
+				ArrayList<String> currItems = view.getAllItems();
+				if (currPos != currItems.size() - 1) {
 					model.moveItemDown(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos + 1);
@@ -68,9 +69,9 @@ public class ProBasicPresenter extends BasicPresenter {
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
-				String[] currItems = view.getAllItems();
-				String[] newItems = model.removeItem(currPos, currItems);
-				view.replaceItems(newItems);
+				ArrayList<String> currItems = view.getAllItems();
+				currItems.remove(currPos);
+				view.replaceItems(currItems);
 			}
 		}, ProBasicView.ProTypes.REMOVE);
 	}

@@ -1,9 +1,9 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicModelTest;
@@ -50,33 +50,30 @@ public class ProBasicModelTest extends BasicModelTest {
 	@Test
 	public void moveItemUp_ReturnsDesiredItemMovedUpByOne() {
 		int testPos = 1;
-		String[] testItems = { "First", "Second", "Third" };
-		String[] expectedOutput = { "Second", "First", "Third" };
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedOutput = makeStringList("Second", "First", "Third");
 
 		proModel.moveItemUp(testPos, testItems);
 
-		assertArrayEquals(expectedOutput, testItems);
+		assertEquals(expectedOutput, testItems);
 	}
 
 	@Test
 	public void moveItemDown_ReturnsDesiredItemMovedDownByOne() {
 		int testPos = 1;
-		String[] testItems = { "First", "Second", "Third" };
-		String[] expectedOutput = { "First", "Third", "Second" };
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedOutput = makeStringList("First", "Third", "Second");
 
 		proModel.moveItemDown(testPos, testItems);
 
-		assertArrayEquals(expectedOutput, testItems);
+		assertEquals(expectedOutput, testItems);
 	}
 
-	@Test
-	public void removeItem_ReturnsItemsWithoutInputPosition() {
-		int testPos = 1;
-		String[] testItems = { "First", "Second", "Third" };
-		String[] expectedOutput = { "First", "Third" };
-
-		String[] actualOutput = proModel.removeItem(testPos, testItems);
-
-		assertArrayEquals(expectedOutput, actualOutput);
+	private ArrayList<String> makeStringList(String... args) {
+		ArrayList<String> result = new ArrayList<String>();
+		for (String item : args) {
+			result.add(item);
+		}
+		return result;
 	}
 }
