@@ -7,6 +7,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
@@ -133,7 +134,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	@Test
 	public void whenMoveUpButtonIsClicked_ThenCurrentSelectedItemShouldMoveUp() {
 		int testPos = 1;
-		String[] testItems = { "First", "Second", "Third" };
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
 		when(proView.getSelectedPosition()).thenReturn(testPos);
 		when(proView.getAllItems()).thenReturn(testItems);
 		createPresenter();
@@ -149,22 +150,24 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	@Test
 	public void whenMoveUpButtonIsClickedWhenTopItemIsSelected_ThenNothingShouldHappen() {
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
 		when(proView.getSelectedPosition()).thenReturn(0);
+		when(proView.getAllItems()).thenReturn(testItems);
 		createPresenter();
 
 		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
 
 		listener.getValue().fire();
 
-		verify(proModel, never()).moveItemUp(any(Integer.class), any(String[].class));
-		verify(proView, never()).replaceItems(any(String[].class));
+		verify(proModel, never()).moveItemUp(0, testItems);
+		verify(proView, never()).replaceItems(testItems);
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 
 	@Test
 	public void whenMovedDownButtonIsClicked_ThenCurrentSelectedItemShouldMoveDown() {
 		int testPos = 1;
-		String[] testItems = { "First", "Second", "Third" };
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
 		when(proView.getSelectedPosition()).thenReturn(testPos);
 		when(proView.getAllItems()).thenReturn(testItems);
 		createPresenter();
@@ -180,7 +183,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	@Test
 	public void whenMoveDownButtonIsClickedWhenBottomItemIsSelected_ThenNothingShouldHappen() {
-		String[] testItems = { "First", "Second", "Third" };
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
 		when(proView.getSelectedPosition()).thenReturn(2);
 		when(proView.getAllItems()).thenReturn(testItems);
 		createPresenter();
@@ -189,8 +192,76 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 
 		listener.getValue().fire();
 
-		verify(proModel, never()).moveItemDown(any(Integer.class), any(String[].class));
-		verify(proView, never()).replaceItems(any(String[].class));
+		verify(proModel, never()).moveItemDown(0, testItems);
+		verify(proView, never()).replaceItems(testItems);
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressed_ThenSelectedItemIsRemoved() {
+		int testPos = 1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedItems = makeStringList("First", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).replaceItems(expectedItems);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedOnLastItem_ThenTheNextLastItemShouldBeManuallySelected() {
+		int testPos = 2;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).highlightAndSelect(testPos - 1);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedForOnlyItem_ThenControllerDisappears() {
+		int testPos = 0;
+		ArrayList<String> testItems = makeStringList("First");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).hideController();
+	}
+
+	@Test
+	public void whenUserResetsListFromMenu_ThenListShouldBeRestoredToNormalAndNoItemSelected() {
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MENU_RESET_LIST));
+
+		listener.getValue().fire();
+
+		verify(proView).resetList();
+		verify(proView).hideController();
+		verify(proView).clearChoices();
+		verify(proView).setSelectedPosition(-1);
+	}
+
+	private ArrayList<String> makeStringList(String... args) {
+		ArrayList<String> result = new ArrayList<String>();
+		for (String item : args) {
+			result.add(item);
+		}
+		return result;
 	}
 }

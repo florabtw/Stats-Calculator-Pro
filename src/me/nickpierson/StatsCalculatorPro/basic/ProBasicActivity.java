@@ -1,10 +1,17 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 import me.nickpierson.StatsCalculator.basic.BasicActivity;
 import me.nickpierson.StatsCalculator.utils.Constants;
+import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +25,7 @@ public class ProBasicActivity extends BasicActivity {
 		super.onCreate(savedInstanceState);
 
 		prefs = getPreferences(MODE_PRIVATE);
-		String[] resultsOrder = loadResults(prefs.getString(RESULTS_KEY, null));
+		ArrayList<String> resultsOrder = loadResults(prefs.getString(RESULTS_KEY, null));
 
 		view = new ProBasicView(this, resultsOrder);
 		model = new ProBasicModel(this);
@@ -27,15 +34,17 @@ public class ProBasicActivity extends BasicActivity {
 		setContentView(view.getView());
 	}
 
-	protected String[] loadResults(String joinedString) {
-		String[] resultsOrder;
+	protected ArrayList<String> loadResults(String joinedString) {
+		ArrayList<String> resultsOrder;
 		if (joinedString == null) {
-			resultsOrder = new String[Constants.BASIC_TITLES.length + ProConstants.PRO_BASIC_TITLES.length];
-			System.arraycopy(Constants.BASIC_TITLES, 0, resultsOrder, 0, Constants.BASIC_TITLES.length);
-			System.arraycopy(ProConstants.PRO_BASIC_TITLES, 0, resultsOrder, Constants.BASIC_TITLES.length, ProConstants.PRO_BASIC_TITLES.length);
+			resultsOrder = new ArrayList<String>(Arrays.asList(Constants.BASIC_TITLES));
+			Collections.addAll(resultsOrder, ProConstants.PRO_BASIC_TITLES);
+		} else if (joinedString.length() <= 1) {
+			resultsOrder = new ArrayList<String>();
 		} else {
-			resultsOrder = joinedString.split(",");
+			resultsOrder = new ArrayList<String>(Arrays.asList(joinedString.split(",")));
 		}
+
 		return resultsOrder;
 	}
 
@@ -45,14 +54,31 @@ public class ProBasicActivity extends BasicActivity {
 
 		SharedPreferences.Editor editor = prefs.edit();
 		StringBuilder builder = new StringBuilder();
-		String[] items = ((ProBasicView) view).getAllItems();
+		ArrayList<String> items = ((ProBasicView) view).getAllItems();
 
-		for (int i = 0; i < items.length; i++) {
-			builder.append(items[i] + ",");
+		for (int i = 0; i < items.size(); i++) {
+			builder.append(items.get(i) + ",");
 		}
 
 		editor.putString(RESULTS_KEY, builder.toString());
 		editor.commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.pro_basic, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.menu_basic_reset) {
+			((ProBasicView) view).menuListReset();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

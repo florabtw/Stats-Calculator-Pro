@@ -1,10 +1,13 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
+import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -22,20 +25,21 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST;
 	}
 
 	ProKeypadHelper proKeypadHelper;
 	private RelativeLayout proResults;
 	private LinearLayout controller;
 
-	public ProBasicView(Activity activity, String[] results) {
+	public ProBasicView(Activity activity, ArrayList<String> results) {
 		super(activity);
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.basic_btnMoveUp);
 		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.basic_btnMoveDown);
+		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.basic_btnRemove);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -49,7 +53,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		proResults.addView(lvResults, 0, params);
 
 		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
-		resultsAdapter.addAll(results);
+		resultsAdapter.addMultiple(results);
 
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvResults.setAdapter(resultsAdapter);
@@ -79,19 +83,17 @@ public class ProBasicView extends BasicView implements IHelperView {
 			}
 		});
 
-		btnMoveUp.setOnClickListener(new OnClickListener() {
+		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
+		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
+		eventOnClick(btnRemove, ProTypes.REMOVE);
+	}
+
+	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {
+		button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				event(ProTypes.MOVE_UP);
-			}
-		});
-
-		btnMoveDown.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				event(ProTypes.MOVE_DOWN);
+				event(type);
 			}
 		});
 	}
@@ -123,27 +125,36 @@ public class ProBasicView extends BasicView implements IHelperView {
 		lvResults.setItemChecked(pos, true);
 	}
 
-	public String[] getAllItems() {
-		int count = resultsAdapter.getCount();
-		String[] result = new String[count];
-		for (int i = 0; i < count; i++) {
-			result[i] = resultsAdapter.getItem(i);
+	public ArrayList<String> getAllItems() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (int i = 0; i < resultsAdapter.getCount(); i++) {
+			result.add(resultsAdapter.getItem(i));
 		}
 
 		return result;
 	}
 
-	public void replaceItems(String[] items) {
+	public void replaceItems(ArrayList<String> items) {
 		resultsAdapter.clear();
-		resultsAdapter.addAll(items);
+		resultsAdapter.addMultiple(items);
 	}
 
 	public void clearChoices() {
 		lvResults.clearChoices();
 	}
 
+	public void resetList() {
+		resultsAdapter.clear();
+		resultsAdapter.addMultiple(Constants.BASIC_TITLES);
+		resultsAdapter.addMultiple(ProConstants.PRO_BASIC_TITLES);
+	}
+
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
+	}
+
+	public void menuListReset() {
+		event(ProTypes.MENU_RESET_LIST);
 	}
 
 	public void keypadPress(Button button) {

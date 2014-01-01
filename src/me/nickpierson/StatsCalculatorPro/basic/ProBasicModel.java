@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,17 +58,16 @@ public class ProBasicModel extends BasicModel {
 		return Math.sqrt(squaresSummed / numberList.size());
 	}
 
-	public void moveItemUp(int position, String[] items) {
-		swap(items, position, position - 1);
+	public void moveItemUp(int position, ArrayList<String> currItems) {
+		moveItem(currItems, position, position - 1);
 	}
 
-	public void moveItemDown(int position, String[] items) {
-		swap(items, position, position + 1);
+	public void moveItemDown(int position, ArrayList<String> currItems) {
+		moveItem(currItems, position, position + 1);
 	}
 
-	private void swap(String[] array, int pos1, int pos2) {
-		String temp = array[pos1];
-		array[pos1] = array[pos2];
-		array[pos2] = temp;
+	private void moveItem(ArrayList<String> items, int pos, int desiredPos) {
+		String item = items.remove(pos);
+		items.add(desiredPos, item);
 	}
 }

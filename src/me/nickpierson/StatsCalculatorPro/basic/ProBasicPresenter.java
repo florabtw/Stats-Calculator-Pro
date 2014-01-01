@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
@@ -30,9 +31,7 @@ public class ProBasicPresenter extends BasicPresenter {
 				} else if (oldPosition != newPosition) {
 					view.setSelectedPosition(newPosition);
 				} else {
-					view.setSelectedPosition(-1);
-					view.clearChoices();
-					view.hideController();
+					deselect(view);
 				}
 			}
 		}, ProBasicView.ProTypes.ITEM_CLICK);
@@ -42,7 +41,7 @@ public class ProBasicPresenter extends BasicPresenter {
 			public void fire() {
 				int currPos = view.getSelectedPosition();
 				if (currPos != 0) {
-					String[] currItems = view.getAllItems();
+					ArrayList<String> currItems = view.getAllItems();
 					model.moveItemUp(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos - 1);
@@ -54,17 +53,49 @@ public class ProBasicPresenter extends BasicPresenter {
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
-				String[] currItems = view.getAllItems();
-				if (currPos != currItems.length - 1) {
+				ArrayList<String> currItems = view.getAllItems();
+				if (currPos != currItems.size() - 1) {
 					model.moveItemDown(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos + 1);
 				}
 			}
 		}, ProBasicView.ProTypes.MOVE_DOWN);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				ArrayList<String> currItems = view.getAllItems();
+				currItems.remove(currPos);
+				view.replaceItems(currItems);
+
+				if (currItems.size() == 0) {
+					view.hideController();
+				} else if (currPos == currItems.size()) {
+					view.highlightAndSelect(currPos - 1);
+				}
+			}
+		}, ProBasicView.ProTypes.REMOVE);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				view.resetList();
+				deselect(view);
+			}
+		}, ProBasicView.ProTypes.MENU_RESET_LIST);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {
 		proHelper.handleWakeLock(activity, view);
+	}
+
+	private static void deselect(final ProBasicView view) {
+		view.setSelectedPosition(-1);
+		view.clearChoices();
+		view.hideController();
 	}
 }
