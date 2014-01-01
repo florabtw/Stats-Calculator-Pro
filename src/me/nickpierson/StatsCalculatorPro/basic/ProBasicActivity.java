@@ -36,6 +36,8 @@ public class ProBasicActivity extends BasicActivity {
 		if (joinedString == null) {
 			resultsOrder = new ArrayList<String>(Arrays.asList(Constants.BASIC_TITLES));
 			Collections.addAll(resultsOrder, ProConstants.PRO_BASIC_TITLES);
+		} else if (joinedString.length() <= 1) {
+			resultsOrder = new ArrayList<String>();
 		} else {
 			resultsOrder = new ArrayList<String>(Arrays.asList(joinedString.split(",")));
 		}
