@@ -228,6 +228,21 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).highlightAndSelect(testPos - 1);
 	}
 
+	@Test
+	public void whenRemoveButtonIsPressedForOnlyItem_ThenControllerDisappears() {
+		int testPos = 0;
+		ArrayList<String> testItems = makeStringList("First");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).hideController();
+	}
+
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (String item : args) {

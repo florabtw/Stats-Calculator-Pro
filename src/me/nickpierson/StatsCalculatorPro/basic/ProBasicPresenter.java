@@ -73,7 +73,9 @@ public class ProBasicPresenter extends BasicPresenter {
 				currItems.remove(currPos);
 				view.replaceItems(currItems);
 
-				if (currPos == currItems.size()) {
+				if (currItems.size() == 0) {
+					view.hideController();
+				} else if (currPos == currItems.size()) {
 					view.highlightAndSelect(currPos - 1);
 				}
 			}
