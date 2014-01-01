@@ -31,9 +31,7 @@ public class ProBasicPresenter extends BasicPresenter {
 				} else if (oldPosition != newPosition) {
 					view.setSelectedPosition(newPosition);
 				} else {
-					view.setSelectedPosition(-1);
-					view.clearChoices();
-					view.hideController();
+					deselect(view);
 				}
 			}
 		}, ProBasicView.ProTypes.ITEM_CLICK);
@@ -80,20 +78,24 @@ public class ProBasicPresenter extends BasicPresenter {
 				}
 			}
 		}, ProBasicView.ProTypes.REMOVE);
-		
+
 		view.addListener(new ActionListener() {
-			
+
 			@Override
 			public void fire() {
 				view.resetList();
-				view.hideController();
-				view.clearChoices();
-				view.setSelectedPosition(-1);
+				deselect(view);
 			}
 		}, ProBasicView.ProTypes.MENU_RESET_LIST);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {
 		proHelper.handleWakeLock(activity, view);
+	}
+
+	private static void deselect(final ProBasicView view) {
+		view.setSelectedPosition(-1);
+		view.clearChoices();
+		view.hideController();
 	}
 }

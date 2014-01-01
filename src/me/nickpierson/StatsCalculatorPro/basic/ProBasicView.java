@@ -134,9 +134,9 @@ public class ProBasicView extends BasicView implements IHelperView {
 		return result;
 	}
 
-	public void replaceItems(ArrayList<String> currItems) {
+	public void replaceItems(ArrayList<String> items) {
 		resultsAdapter.clear();
-		resultsAdapter.addMultiple(currItems);
+		resultsAdapter.addMultiple(items);
 	}
 
 	public void clearChoices() {
