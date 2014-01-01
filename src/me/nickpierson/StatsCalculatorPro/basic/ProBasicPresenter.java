@@ -72,6 +72,10 @@ public class ProBasicPresenter extends BasicPresenter {
 				ArrayList<String> currItems = view.getAllItems();
 				currItems.remove(currPos);
 				view.replaceItems(currItems);
+
+				if (currPos == currItems.size()) {
+					view.highlightAndSelect(currPos - 1);
+				}
 			}
 		}, ProBasicView.ProTypes.REMOVE);
 	}

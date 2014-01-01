@@ -211,7 +211,21 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		listener.getValue().fire();
 
 		verify(proView).replaceItems(expectedItems);
-		// verify(proView).highlightAndSelect(testPos);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedOnLastItem_ThenTheNextLastItemShouldBeManuallySelected() {
+		int testPos = 2;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).highlightAndSelect(testPos - 1);
 	}
 
 	private ArrayList<String> makeStringList(String... args) {
