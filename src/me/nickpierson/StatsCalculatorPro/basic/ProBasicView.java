@@ -3,10 +3,8 @@ package me.nickpierson.StatsCalculatorPro.basic;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
-import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
-import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -31,7 +29,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 	private RelativeLayout proResults;
 	private LinearLayout controller;
 
-	public ProBasicView(Activity activity) {
+	public ProBasicView(Activity activity, String[] results) {
 		super(activity);
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
@@ -51,8 +49,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		proResults.addView(lvResults, 0, params);
 
 		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
-		resultsAdapter.addAll(Constants.BASIC_TITLES);
-		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
+		resultsAdapter.addAll(results);
 
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvResults.setAdapter(resultsAdapter);
