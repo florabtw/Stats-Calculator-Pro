@@ -2,24 +2,23 @@ package me.nickpierson.StatsCalculatorPro.basic;
 
 import java.util.HashMap;
 
-import me.nickpierson.StatsCalculator.basic.BasicModel;
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
 import me.nickpierson.StatsCalculatorPro.ProHelper;
 import android.app.Activity;
 
+import com.thecellutioncenter.mvplib.ActionListener;
 import com.thecellutioncenter.mvplib.DataActionListener;
 
 public class ProBasicPresenter extends BasicPresenter {
 
 	static ProHelper proHelper = new ProHelper();
 
-	public static void create(final Activity activity, final BasicModel model, final ProBasicView view) {
+	public static void create(final Activity activity, final ProBasicModel model, final ProBasicView view) {
 		setup(activity, model, view);
 
 		handleWakeLock(activity, view);
 
 		view.addListener(new DataActionListener() {
-
 			@Override
 			public void fire(HashMap<Enum<?>, ?> data) {
 				int oldPosition = view.getSelectedPosition();
@@ -37,6 +36,32 @@ public class ProBasicPresenter extends BasicPresenter {
 				}
 			}
 		}, ProBasicView.ProTypes.ITEM_CLICK);
+
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				if (currPos != 0) {
+					String[] currItems = view.getAllItems();
+					model.moveItemUp(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos - 1);
+				}
+			}
+		}, ProBasicView.ProTypes.MOVE_UP);
+
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				String[] currItems = view.getAllItems();
+				if (currPos != currItems.length - 1) {
+					model.moveItemDown(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos + 1);
+				}
+			}
+		}, ProBasicView.ProTypes.MOVE_DOWN);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {

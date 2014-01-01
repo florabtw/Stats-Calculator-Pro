@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -27,6 +28,7 @@ import android.content.SharedPreferences;
 public class ProBasicPresenterTest extends BasicPresenterTest {
 
 	ProBasicView proView;
+	ProBasicModel proModel;
 
 	private static final String WAKE_LOCK = "wake lock";
 
@@ -38,6 +40,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		super.setup();
 
 		proView = mock(ProBasicView.class);
+		proModel = mock(ProBasicModel.class);
 
 		Context context = Robolectric.application.getApplicationContext();
 		when(activity.getApplicationContext()).thenReturn(context);
@@ -47,7 +50,7 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 	}
 
 	public void createPresenter() {
-		ProBasicPresenter.create(activity, model, proView);
+		ProBasicPresenter.create(activity, proModel, proView);
 	}
 
 	@Test
@@ -125,5 +128,69 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).clearChoices();
 		verify(proView).setSelectedPosition(-1);
 		verify(proView).hideController();
+	}
+
+	@Test
+	public void whenMoveUpButtonIsClicked_ThenCurrentSelectedItemShouldMoveUp() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
+
+		listener.getValue().fire();
+
+		verify(proModel).moveItemUp(testPos, testItems);
+		verify(proView).replaceItems(testItems);
+		verify(proView).highlightAndSelect(testPos - 1);
+	}
+
+	@Test
+	public void whenMoveUpButtonIsClickedWhenTopItemIsSelected_ThenNothingShouldHappen() {
+		when(proView.getSelectedPosition()).thenReturn(0);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_UP));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemUp(any(Integer.class), any(String[].class));
+		verify(proView, never()).replaceItems(any(String[].class));
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
+
+	@Test
+	public void whenMovedDownButtonIsClicked_ThenCurrentSelectedItemShouldMoveDown() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel).moveItemDown(testPos, testItems);
+		verify(proView).replaceItems(testItems);
+		verify(proView).highlightAndSelect(testPos + 1);
+	}
+
+	@Test
+	public void whenMoveDownButtonIsClickedWhenBottomItemIsSelected_ThenNothingShouldHappen() {
+		String[] testItems = { "First", "Second", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(2);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemDown(any(Integer.class), any(String[].class));
+		verify(proView, never()).replaceItems(any(String[].class));
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 }

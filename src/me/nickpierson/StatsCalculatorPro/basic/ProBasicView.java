@@ -3,14 +3,13 @@ package me.nickpierson.StatsCalculatorPro.basic;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
-import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
-import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,18 +22,20 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
 	}
 
 	ProKeypadHelper proKeypadHelper;
 	private RelativeLayout proResults;
 	private LinearLayout controller;
 
-	public ProBasicView(Activity activity) {
+	public ProBasicView(Activity activity, String[] results) {
 		super(activity);
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
+		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.basic_btnMoveUp);
+		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.basic_btnMoveDown);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -48,8 +49,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		proResults.addView(lvResults, 0, params);
 
 		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
-		resultsAdapter.addAll(Constants.BASIC_TITLES);
-		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
+		resultsAdapter.addAll(results);
 
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvResults.setAdapter(resultsAdapter);
@@ -78,6 +78,22 @@ public class ProBasicView extends BasicView implements IHelperView {
 				dataEvent(ProTypes.ITEM_CLICK, map);
 			}
 		});
+
+		btnMoveUp.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				event(ProTypes.MOVE_UP);
+			}
+		});
+
+		btnMoveDown.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				event(ProTypes.MOVE_DOWN);
+			}
+		});
 	}
 
 	@Override
@@ -100,6 +116,26 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public int getSelectedPosition() {
 		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
+	}
+
+	public void highlightAndSelect(int pos) {
+		setSelectedPosition(pos);
+		lvResults.setItemChecked(pos, true);
+	}
+
+	public String[] getAllItems() {
+		int count = resultsAdapter.getCount();
+		String[] result = new String[count];
+		for (int i = 0; i < count; i++) {
+			result[i] = resultsAdapter.getItem(i);
+		}
+
+		return result;
+	}
+
+	public void replaceItems(String[] items) {
+		resultsAdapter.clear();
+		resultsAdapter.addAll(items);
 	}
 
 	public void clearChoices() {
