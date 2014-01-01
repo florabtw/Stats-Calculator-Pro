@@ -4,6 +4,7 @@
 - Move items up and down
 - Remove items from list
 - Item position / removal persists
+- Restore (re)moved items using menu
 
         Perm & Comb:
 - Screen stays on if preference is set
