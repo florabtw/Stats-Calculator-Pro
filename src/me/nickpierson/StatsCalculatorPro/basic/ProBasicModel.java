@@ -70,4 +70,17 @@ public class ProBasicModel extends BasicModel {
 		array[pos1] = array[pos2];
 		array[pos2] = temp;
 	}
+
+	public String[] removeItem(int position, String[] items) {
+		// TODO this array can be changed to an array list everywhere.
+		String[] result = new String[items.length - 1];
+		int i = 0;
+		for (String item : items) {
+			if (item != items[position]) {
+				result[i] = item;
+				i++;
+			}
+		}
+		return result;
+	}
 }

@@ -193,4 +193,23 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView, never()).replaceItems(any(String[].class));
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
+	
+	@Test
+	public void whenRemoveButtonIsPressed_ThenSelectedItemIsRemoved() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		String[] expectedItems = { "First", "Third" };
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		when(proModel.removeItem(testPos, testItems)).thenReturn(expectedItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proModel).removeItem(testPos, testItems);
+		verify(proView).replaceItems(expectedItems);
+//		verify(proView).highlightAndSelect(testPos);
+	}
 }

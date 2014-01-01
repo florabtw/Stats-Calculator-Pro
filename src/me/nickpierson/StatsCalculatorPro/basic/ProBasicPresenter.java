@@ -62,6 +62,17 @@ public class ProBasicPresenter extends BasicPresenter {
 				}
 			}
 		}, ProBasicView.ProTypes.MOVE_DOWN);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				String[] currItems = view.getAllItems();
+				String[] newItems = model.removeItem(currPos, currItems);
+				view.replaceItems(newItems);
+			}
+		}, ProBasicView.ProTypes.REMOVE);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {

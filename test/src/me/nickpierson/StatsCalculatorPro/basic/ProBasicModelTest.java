@@ -68,4 +68,15 @@ public class ProBasicModelTest extends BasicModelTest {
 
 		assertArrayEquals(expectedOutput, testItems);
 	}
+
+	@Test
+	public void removeItem_ReturnsItemsWithoutInputPosition() {
+		int testPos = 1;
+		String[] testItems = { "First", "Second", "Third" };
+		String[] expectedOutput = { "First", "Third" };
+
+		String[] actualOutput = proModel.removeItem(testPos, testItems);
+
+		assertArrayEquals(expectedOutput, actualOutput);
+	}
 }
