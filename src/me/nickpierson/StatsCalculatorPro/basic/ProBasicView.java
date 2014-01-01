@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicView;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
+import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -139,6 +141,12 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public void clearChoices() {
 		lvResults.clearChoices();
+	}
+
+	public void resetList() {
+		resultsAdapter.clear();
+		resultsAdapter.addAll(Constants.BASIC_TITLES);
+		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
 	}
 
 	public void wakeLock() {

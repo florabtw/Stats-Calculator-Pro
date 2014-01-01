@@ -80,6 +80,17 @@ public class ProBasicPresenter extends BasicPresenter {
 				}
 			}
 		}, ProBasicView.ProTypes.REMOVE);
+		
+		view.addListener(new ActionListener() {
+			
+			@Override
+			public void fire() {
+				view.resetList();
+				view.hideController();
+				view.clearChoices();
+				view.setSelectedPosition(-1);
+			}
+		}, ProBasicView.ProTypes.MENU_RESET_LIST);
 	}
 
 	private static void handleWakeLock(Activity activity, ProBasicView view) {

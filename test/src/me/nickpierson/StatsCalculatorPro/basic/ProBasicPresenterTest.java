@@ -243,6 +243,20 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).hideController();
 	}
 
+	@Test
+	public void whenUserResetsListFromMenu_ThenListShouldBeRestoredToNormalAndNoItemSelected() {
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.MENU_RESET_LIST));
+
+		listener.getValue().fire();
+
+		verify(proView).resetList();
+		verify(proView).hideController();
+		verify(proView).clearChoices();
+		verify(proView).setSelectedPosition(-1);
+	}
+
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (String item : args) {
