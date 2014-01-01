@@ -53,7 +53,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		proResults.addView(lvResults, 0, params);
 
 		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
-		resultsAdapter.addAll(results);
+		resultsAdapter.addMultiple(results);
 
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvResults.setAdapter(resultsAdapter);
@@ -136,7 +136,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public void replaceItems(ArrayList<String> currItems) {
 		resultsAdapter.clear();
-		resultsAdapter.addAll(currItems);
+		resultsAdapter.addMultiple(currItems);
 	}
 
 	public void clearChoices() {
@@ -145,8 +145,8 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	public void resetList() {
 		resultsAdapter.clear();
-		resultsAdapter.addAll(Constants.BASIC_TITLES);
-		resultsAdapter.addAll(ProConstants.PRO_BASIC_TITLES);
+		resultsAdapter.addMultiple(Constants.BASIC_TITLES);
+		resultsAdapter.addMultiple(ProConstants.PRO_BASIC_TITLES);
 	}
 
 	public void wakeLock() {
