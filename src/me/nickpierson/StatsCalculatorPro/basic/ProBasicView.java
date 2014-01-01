@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 public class ProBasicView extends BasicView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -36,6 +36,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.basic_btnMoveUp);
 		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.basic_btnMoveDown);
+		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.basic_btnRemove);
 
 		/*
 		 * Align with parent top. Put above the 'controller' and align with
@@ -79,19 +80,17 @@ public class ProBasicView extends BasicView implements IHelperView {
 			}
 		});
 
-		btnMoveUp.setOnClickListener(new OnClickListener() {
+		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
+		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
+		eventOnClick(btnRemove, ProTypes.REMOVE);
+	}
+
+	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {
+		button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				event(ProTypes.MOVE_UP);
-			}
-		});
-
-		btnMoveDown.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				event(ProTypes.MOVE_DOWN);
+				event(type);
 			}
 		});
 	}
