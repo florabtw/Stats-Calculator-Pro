@@ -11,8 +11,30 @@ import android.app.Activity;
 
 public class ProBasicModel extends BasicModel {
 
+	private HashMap<String, String> urlMap;
+
 	public ProBasicModel(Activity activity) {
 		super(activity);
+
+		String path = "file:///android_asset/";
+		urlMap = new HashMap<String, String>();
+		urlMap.put(Constants.SIZE, path + "size.html");
+		urlMap.put(Constants.SUM, path + "sum.html");
+		urlMap.put(Constants.ARITH_MEAN, path + "arith_mean.html");
+		urlMap.put(Constants.GEO_MEAN, path + "geo_mean.html");
+		urlMap.put(Constants.MEDIAN, path + "median.html");
+		urlMap.put(Constants.MODE, path + "mode.html");
+		urlMap.put(Constants.RANGE, path + "range.html");
+		urlMap.put(Constants.SAMPLE_VAR, path + "sample_var.html");
+		urlMap.put(Constants.POP_VAR, path + "pop_var.html");
+		urlMap.put(Constants.SAMPLE_DEV, path + "sample_dev.html");
+		urlMap.put(Constants.POP_DEV, path + "pop_dev.html");
+		urlMap.put(Constants.COEFF_VAR, path + "coeff_var.html");
+		urlMap.put(Constants.SKEWNESS, path + "skewness.html");
+		urlMap.put(Constants.KURTOSIS, path + "kurtosis.html");
+		urlMap.put(ProConstants.STD_ERROR, path + "std_error.html");
+		urlMap.put(ProConstants.SUM_SQRS, path + "sum_sqrs.html");
+		urlMap.put(ProConstants.RMS, path + "rms.html");
 	}
 
 	@Override
@@ -69,5 +91,9 @@ public class ProBasicModel extends BasicModel {
 	private void moveItem(ArrayList<String> items, int pos, int desiredPos) {
 		String item = items.remove(pos);
 		items.add(desiredPos, item);
+	}
+
+	public String getEquationUrl(String key) {
+		return urlMap.get(key);
 	}
 }

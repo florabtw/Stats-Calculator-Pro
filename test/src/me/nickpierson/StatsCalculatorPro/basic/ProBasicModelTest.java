@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicModelTest;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 
 import org.junit.Before;
@@ -67,6 +68,27 @@ public class ProBasicModelTest extends BasicModelTest {
 		proModel.moveItemDown(testPos, testItems);
 
 		assertEquals(expectedOutput, testItems);
+	}
+
+	@Test
+	public void getEquationUrl_ReturnsCorrectUrl() {
+		assertEquals("file:///android_asset/size.html", proModel.getEquationUrl(Constants.SIZE));
+		assertEquals("file:///android_asset/sum.html", proModel.getEquationUrl(Constants.SUM));
+		assertEquals("file:///android_asset/arith_mean.html", proModel.getEquationUrl(Constants.ARITH_MEAN));
+		assertEquals("file:///android_asset/geo_mean.html", proModel.getEquationUrl(Constants.GEO_MEAN));
+		assertEquals("file:///android_asset/median.html", proModel.getEquationUrl(Constants.MEDIAN));
+		assertEquals("file:///android_asset/mode.html", proModel.getEquationUrl(Constants.MODE));
+		assertEquals("file:///android_asset/range.html", proModel.getEquationUrl(Constants.RANGE));
+		assertEquals("file:///android_asset/sample_var.html", proModel.getEquationUrl(Constants.SAMPLE_VAR));
+		assertEquals("file:///android_asset/pop_var.html", proModel.getEquationUrl(Constants.POP_VAR));
+		assertEquals("file:///android_asset/sample_dev.html", proModel.getEquationUrl(Constants.SAMPLE_DEV));
+		assertEquals("file:///android_asset/pop_dev.html", proModel.getEquationUrl(Constants.POP_DEV));
+		assertEquals("file:///android_asset/coeff_var.html", proModel.getEquationUrl(Constants.COEFF_VAR));
+		assertEquals("file:///android_asset/skewness.html", proModel.getEquationUrl(Constants.SKEWNESS));
+		assertEquals("file:///android_asset/kurtosis.html", proModel.getEquationUrl(Constants.KURTOSIS));
+		assertEquals("file:///android_asset/std_error.html", proModel.getEquationUrl(ProConstants.STD_ERROR));
+		assertEquals("file:///android_asset/sum_sqrs.html", proModel.getEquationUrl(ProConstants.SUM_SQRS));
+		assertEquals("file:///android_asset/rms.html", proModel.getEquationUrl(ProConstants.RMS));
 	}
 
 	private ArrayList<String> makeStringList(String... args) {

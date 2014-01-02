@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicPresenterTest;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.R;
 
 import org.junit.Before;
@@ -255,6 +256,22 @@ public class ProBasicPresenterTest extends BasicPresenterTest {
 		verify(proView).hideController();
 		verify(proView).clearChoices();
 		verify(proView).setSelectedPosition(-1);
+	}
+
+	@Test
+	public void whenInfoButtonIsPressed_ThenEquationForSelectedItemIsDisplayed() {
+		String selection = Constants.SIZE;
+		String url = "file:///fake/dir";
+		when(proView.getSelectedItem()).thenReturn(selection);
+		when(proModel.getEquationUrl(selection)).thenReturn(url);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProBasicView.ProTypes.INFO));
+
+		listener.getValue().fire();
+
+		verify(proModel).getEquationUrl(selection);
+		verify(proView).displayItemInfo(url);
 	}
 
 	private ArrayList<String> makeStringList(String... args) {

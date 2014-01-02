@@ -83,6 +83,16 @@ public class ProBasicPresenter extends BasicPresenter {
 
 			@Override
 			public void fire() {
+				String selection = view.getSelectedItem();
+				String url = model.getEquationUrl(selection);
+				view.displayItemInfo(url);
+			}
+		}, ProBasicView.ProTypes.INFO);
+
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
 				view.resetList();
 				deselect(view);
 			}
