@@ -5,6 +5,8 @@
 - Remove items from list
 - Item position / removal persists
 - Restore (re)moved items using menu
+- Show info on each item
+- Copy result to clipboard on long-click
 
         Perm & Comb:
 - Screen stays on if preference is set
