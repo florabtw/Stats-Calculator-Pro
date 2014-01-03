@@ -73,6 +73,38 @@ public class ProHelper implements IProHelper {
 		}, type);
 	}
 
+	@Override
+	public <T extends DataActionHandler & IHelperView> void listenForRemoveClick(final T view, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				ArrayList<String> currItems = view.getAllItems();
+				currItems.remove(currPos);
+				view.replaceItems(currItems);
+
+				if (currItems.size() == 0) {
+					view.hideController();
+				} else if (currPos == currItems.size()) {
+					view.highlightAndSelect(currPos - 1);
+				}
+			}
+		}, type);
+	}
+
+	@Override
+	public <T extends DataActionHandler & IHelperView> void listenForResetList(final T view, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				view.resetList();
+				deselect(view);
+			}
+		}, type);
+	}
+
 	private <T extends DataActionHandler & IHelperView> void deselect(T view) {
 		view.setSelectedPosition(-1);
 		view.clearChoices();

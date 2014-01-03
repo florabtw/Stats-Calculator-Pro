@@ -163,6 +163,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		lvResults.clearChoices();
 	}
 
+	@Override
 	public void resetList() {
 		resultsAdapter.clear();
 		resultsAdapter.addMultiple(Constants.BASIC_TITLES);

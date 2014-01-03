@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.pc.PCView;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
@@ -25,7 +26,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -33,7 +34,7 @@ public class ProPCView extends PCView implements IHelperView {
 	private ListView lvResults;
 	private LinearLayout controller;
 
-	public ProPCView(Activity activity) {
+	public ProPCView(Activity activity, ArrayList<String> results) {
 		super(activity, new ProDefaultAdapter(activity, R.layout.perm_comb_results_item, R.id.pc_tvResultsTitle, R.id.pc_tvResultsResult));
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
@@ -41,9 +42,11 @@ public class ProPCView extends PCView implements IHelperView {
 		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
 		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveDown);
+		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.pro_results_btnRemove);
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		resultsAdapter.addMultiple(results);
 		flFrame.addView(proResults);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
@@ -73,6 +76,7 @@ public class ProPCView extends PCView implements IHelperView {
 
 		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
 		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
+		eventOnClick(btnRemove, ProTypes.REMOVE);
 	}
 
 	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {
@@ -140,8 +144,18 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	@Override
+	public void resetList() {
+		resultsAdapter.clear();
+		resultsAdapter.addMultiple(Constants.PC_TITLES);
+	}
+
+	@Override
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
+	}
+
+	public void menuListReset() {
+		event(ProTypes.MENU_RESET_LIST);
 	}
 
 	public void keypadPress(Button button) {
@@ -175,4 +189,5 @@ public class ProPCView extends PCView implements IHelperView {
 
 		return etSelected;
 	}
+
 }

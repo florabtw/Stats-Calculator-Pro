@@ -199,6 +199,66 @@ public class ProPCPresenterTest extends PCPresenterTest {
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 
+	@Test
+	public void whenRemoveButtonIsPressed_ThenSelectedItemIsRemoved() {
+		int testPos = 1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedItems = makeStringList("First", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).replaceItems(expectedItems);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedOnLastItem_ThenTheNextLastItemShouldBeManuallySelected() {
+		int testPos = 2;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).highlightAndSelect(testPos - 1);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedForOnlyItem_ThenControllerDisappears() {
+		int testPos = 0;
+		ArrayList<String> testItems = makeStringList("First");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).hideController();
+	}
+
+	@Test
+	public void whenUserResetsListFromMenu_ThenListShouldBeRestoredToNormalAndNoItemSelected() {
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.MENU_RESET_LIST));
+
+		listener.getValue().fire();
+
+		verify(proView).resetList();
+		verify(proView).hideController();
+		verify(proView).clearChoices();
+		verify(proView).setSelectedPosition(-1);
+	}
+
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (String item : args) {

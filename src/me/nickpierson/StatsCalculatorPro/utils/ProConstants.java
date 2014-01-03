@@ -9,4 +9,5 @@ public class ProConstants {
 	public static final String[] PRO_BASIC_TITLES = { STD_ERROR, SUM_SQRS, RMS };
 
 	public static final String COPY_NOTIFICATION = "Copied to Clipboard";
+	public static final String RESULTS_KEY = "results order";
 }

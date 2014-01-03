@@ -13,4 +13,8 @@ public interface IProHelper {
 	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, final Enum<?> type);
 
 	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, final Enum<?> type);
+
+	public <T extends DataActionHandler & IHelperView> void listenForRemoveClick(final T view, final Enum<?> type);
+
+	public <T extends DataActionHandler & IHelperView> void listenForResetList(final T view, final Enum<?> type);
 }
