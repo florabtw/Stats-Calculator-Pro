@@ -86,6 +86,7 @@ public class ProBasicModel extends BasicModel implements IHelperModel {
 		moveItem(currItems, position, position - 1);
 	}
 
+	@Override
 	public void moveItemDown(int position, ArrayList<String> currItems) {
 		moveItem(currItems, position, position + 1);
 	}
