@@ -62,8 +62,8 @@ public class ProBasicView extends BasicView implements IHelperView {
 		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
 		resultsAdapter.addMultiple(results);
 
-		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvResults.setAdapter(resultsAdapter);
+		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
 		ImageButton btnBackspace = (ImageButton) tlKeypad.findViewById(R.id.keypad_backspace);
