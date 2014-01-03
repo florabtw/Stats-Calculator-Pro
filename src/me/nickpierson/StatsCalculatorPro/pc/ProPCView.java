@@ -47,7 +47,6 @@ public class ProPCView extends PCView implements IHelperView {
 		proKeypadHelper.disableSoftInputFromAppearing(etNVals);
 
 		btnBackspace.setOnLongClickListener(new OnLongClickListener() {
-
 			@Override
 			public boolean onLongClick(View v) {
 				EditText etSelected = getSelectedEditText();
@@ -59,10 +58,8 @@ public class ProPCView extends PCView implements IHelperView {
 		});
 
 		lvResults.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
-				// TODO this is duplicate code from ProBasicView
 				HashMap<Enum<?>, Integer> map = new HashMap<Enum<?>, Integer>();
 				map.put(ProTypes.ITEM_CLICK, pos);
 				dataEvent(ProTypes.ITEM_CLICK, map);
