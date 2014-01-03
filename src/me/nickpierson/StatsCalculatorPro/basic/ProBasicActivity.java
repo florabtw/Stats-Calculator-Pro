@@ -17,7 +17,6 @@ import android.widget.Button;
 
 public class ProBasicActivity extends BasicActivity {
 
-	private static final String RESULTS_KEY = "basic results order";
 	private SharedPreferences prefs;
 
 	@Override
@@ -25,7 +24,7 @@ public class ProBasicActivity extends BasicActivity {
 		super.onCreate(savedInstanceState);
 
 		prefs = getPreferences(MODE_PRIVATE);
-		ArrayList<String> resultsOrder = loadResults(prefs.getString(RESULTS_KEY, null));
+		ArrayList<String> resultsOrder = loadResults(prefs.getString(ProConstants.RESULTS_KEY, null));
 
 		view = new ProBasicView(this, resultsOrder);
 		model = new ProBasicModel(this);
@@ -60,7 +59,7 @@ public class ProBasicActivity extends BasicActivity {
 			builder.append(items.get(i) + ",");
 		}
 
-		editor.putString(RESULTS_KEY, builder.toString());
+		editor.putString(ProConstants.RESULTS_KEY, builder.toString());
 		editor.commit();
 	}
 

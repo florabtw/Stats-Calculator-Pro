@@ -33,7 +33,7 @@ public class ProPCView extends PCView implements IHelperView {
 	private ListView lvResults;
 	private LinearLayout controller;
 
-	public ProPCView(Activity activity) {
+	public ProPCView(Activity activity, ArrayList<String> results) {
 		super(activity, new ProDefaultAdapter(activity, R.layout.perm_comb_results_item, R.id.pc_tvResultsTitle, R.id.pc_tvResultsResult));
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
@@ -45,6 +45,7 @@ public class ProPCView extends PCView implements IHelperView {
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		resultsAdapter.addMultiple(results);
 		flFrame.addView(proResults);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
