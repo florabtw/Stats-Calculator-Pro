@@ -6,10 +6,11 @@ import java.util.List;
 
 import me.nickpierson.StatsCalculator.basic.BasicModel;
 import me.nickpierson.StatsCalculator.utils.Constants;
+import me.nickpierson.StatsCalculatorPro.IHelperModel;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.app.Activity;
 
-public class ProBasicModel extends BasicModel {
+public class ProBasicModel extends BasicModel implements IHelperModel {
 
 	private HashMap<String, String> urlMap;
 
@@ -80,6 +81,7 @@ public class ProBasicModel extends BasicModel {
 		return Math.sqrt(squaresSummed / numberList.size());
 	}
 
+	@Override
 	public void moveItemUp(int position, ArrayList<String> currItems) {
 		moveItem(currItems, position, position - 1);
 	}

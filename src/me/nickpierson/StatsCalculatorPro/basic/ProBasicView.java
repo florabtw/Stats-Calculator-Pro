@@ -136,11 +136,13 @@ public class ProBasicView extends BasicView implements IHelperView {
 		return resultsAdapter.getItem(getSelectedPosition());
 	}
 
+	@Override
 	public void highlightAndSelect(int pos) {
 		setSelectedPosition(pos);
 		lvResults.setItemChecked(pos, true);
 	}
 
+	@Override
 	public ArrayList<String> getAllItems() {
 		ArrayList<String> result = new ArrayList<String>();
 		for (int i = 0; i < resultsAdapter.getCount(); i++) {
@@ -150,6 +152,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		return result;
 	}
 
+	@Override
 	public void replaceItems(ArrayList<String> items) {
 		resultsAdapter.clear();
 		resultsAdapter.addMultiple(items);

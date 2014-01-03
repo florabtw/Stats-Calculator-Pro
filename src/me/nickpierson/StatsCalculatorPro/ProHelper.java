@@ -1,11 +1,13 @@
 package me.nickpierson.StatsCalculatorPro;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.thecellutioncenter.mvplib.ActionListener;
 import com.thecellutioncenter.mvplib.DataActionHandler;
 import com.thecellutioncenter.mvplib.DataActionListener;
 
@@ -33,6 +35,21 @@ public class ProHelper implements IProHelper {
 					view.setSelectedPosition(newPosition);
 				} else {
 					deselect(view);
+				}
+			}
+		}, type);
+	}
+
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				if (currPos != 0) {
+					ArrayList<String> currItems = view.getAllItems();
+					model.moveItemUp(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos - 1);
 				}
 			}
 		}, type);
