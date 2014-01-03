@@ -109,6 +109,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public void showResults() {
 		flFrame.removeAllViews();
 		flFrame.addView(proResults);
+		resultsAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -122,13 +123,13 @@ public class ProBasicView extends BasicView implements IHelperView {
 	}
 
 	@Override
-	public void setSelectedPosition(int pos) {
-		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
+	public int getSelectedPosition() {
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
 	}
 
 	@Override
-	public int getSelectedPosition() {
-		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
+	public void setSelectedPosition(int pos) {
+		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
 	}
 
 	public String getSelectedItem() {

@@ -71,16 +71,7 @@ public class ProPCView extends PCView implements IHelperView {
 	public void showResults() {
 		flFrame.removeAllViews();
 		flFrame.addView(proResults);
-	}
-
-	@Override
-	public int getSelectedPosition() {
-		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
-	}
-
-	@Override
-	public void setSelectedPosition(int pos) {
-		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
+		resultsAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -91,6 +82,16 @@ public class ProPCView extends PCView implements IHelperView {
 	@Override
 	public void hideController() {
 		controller.setVisibility(View.GONE);
+	}
+
+	@Override
+	public int getSelectedPosition() {
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
+	}
+
+	@Override
+	public void setSelectedPosition(int pos) {
+		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
 	}
 
 	@Override
