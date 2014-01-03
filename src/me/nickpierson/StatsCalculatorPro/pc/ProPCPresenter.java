@@ -20,5 +20,7 @@ public class ProPCPresenter extends PCPresenter {
 		proHelper.listenForMoveDownClick(view, model, ProPCView.ProTypes.MOVE_DOWN);
 
 		proHelper.listenForRemoveClick(view, ProPCView.ProTypes.REMOVE);
+
+		proHelper.listenForResetList(view, ProPCView.ProTypes.MENU_RESET_LIST);
 	}
 }

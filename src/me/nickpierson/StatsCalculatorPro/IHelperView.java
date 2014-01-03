@@ -22,4 +22,5 @@ public interface IHelperView {
 
 	public void highlightAndSelect(int pos);
 
+	public void resetList();
 }

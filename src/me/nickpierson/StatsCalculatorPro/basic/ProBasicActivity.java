@@ -65,7 +65,7 @@ public class ProBasicActivity extends BasicActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.pro_basic, menu);
+		getMenuInflater().inflate(R.menu.pro_shared, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 

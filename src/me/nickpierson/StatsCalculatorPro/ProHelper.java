@@ -93,6 +93,18 @@ public class ProHelper implements IProHelper {
 		}, type);
 	}
 
+	@Override
+	public <T extends DataActionHandler & IHelperView> void listenForResetList(final T view, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				view.resetList();
+				deselect(view);
+			}
+		}, type);
+	}
+
 	private <T extends DataActionHandler & IHelperView> void deselect(T view) {
 		view.setSelectedPosition(-1);
 		view.clearChoices();

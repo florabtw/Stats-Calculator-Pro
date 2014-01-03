@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.pc.PCView;
+import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
@@ -25,7 +26,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -143,8 +144,18 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	@Override
+	public void resetList() {
+		resultsAdapter.clear();
+		resultsAdapter.addMultiple(Constants.PC_TITLES);
+	}
+
+	@Override
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
+	}
+
+	public void menuListReset() {
+		event(ProTypes.MENU_RESET_LIST);
 	}
 
 	public void keypadPress(Button button) {
@@ -178,4 +189,5 @@ public class ProPCView extends PCView implements IHelperView {
 
 		return etSelected;
 	}
+
 }

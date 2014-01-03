@@ -5,9 +5,12 @@ import java.util.Arrays;
 
 import me.nickpierson.StatsCalculator.pc.PCActivity;
 import me.nickpierson.StatsCalculator.utils.Constants;
+import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -56,6 +59,23 @@ public class ProPCActivity extends PCActivity {
 
 		editor.putString(ProConstants.RESULTS_KEY, builder.toString());
 		editor.commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.pro_shared, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.menu_basic_reset) {
+			((ProPCView) view).menuListReset();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
