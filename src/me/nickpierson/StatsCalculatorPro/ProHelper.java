@@ -1,8 +1,13 @@
 package me.nickpierson.StatsCalculatorPro;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.thecellutioncenter.mvplib.DataActionHandler;
+import com.thecellutioncenter.mvplib.DataActionListener;
 
 public class ProHelper implements IProHelper {
 
@@ -14,4 +19,28 @@ public class ProHelper implements IProHelper {
 		}
 	}
 
+	public <T extends DataActionHandler & IHelperView> void listenForItemClick(final T view, final Enum<?> type) {
+		view.addListener(new DataActionListener() {
+			@Override
+			public void fire(HashMap<Enum<?>, ?> data) {
+				int oldPosition = view.getSelectedPosition();
+				int newPosition = (Integer) data.get(type);
+
+				if (oldPosition == -1) {
+					view.showController();
+					view.setSelectedPosition(newPosition);
+				} else if (oldPosition != newPosition) {
+					view.setSelectedPosition(newPosition);
+				} else {
+					deselect(view);
+				}
+			}
+		}, type);
+	}
+
+	private <T extends DataActionHandler & IHelperView> void deselect(T view) {
+		view.setSelectedPosition(-1);
+		view.clearChoices();
+		view.hideController();
+	}
 }

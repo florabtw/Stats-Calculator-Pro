@@ -32,7 +32,7 @@ public class ProDefaultAdapter extends DefaultAdapter {
 		return selectedPos;
 	}
 
-	public void setSelectedPos(int position) {
+	public void setSelectedPosition(int position) {
 		notifyDataSetChanged();
 		this.selectedPos = position;
 	}

@@ -122,18 +122,22 @@ public class ProBasicView extends BasicView implements IHelperView {
 		flFrame.addView(proResults);
 	}
 
+	@Override
 	public void showController() {
 		controller.setVisibility(View.VISIBLE);
 	}
 
+	@Override
 	public void hideController() {
 		controller.setVisibility(View.GONE);
 	}
 
+	@Override
 	public void setSelectedPosition(int pos) {
-		((ProDefaultAdapter) resultsAdapter).setSelectedPos(pos);
+		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
 	}
 
+	@Override
 	public int getSelectedPosition() {
 		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
 	}
@@ -161,6 +165,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		resultsAdapter.addMultiple(items);
 	}
 
+	@Override
 	public void clearChoices() {
 		lvResults.clearChoices();
 	}
@@ -198,6 +203,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		}
 	}
 
+	@Override
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
 	}

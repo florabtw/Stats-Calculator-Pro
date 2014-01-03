@@ -77,6 +77,31 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	@Override
+	public int getSelectedPosition() {
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
+	}
+
+	@Override
+	public void setSelectedPosition(int pos) {
+		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
+	}
+
+	@Override
+	public void showController() {
+		controller.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	public void hideController() {
+		controller.setVisibility(View.GONE);
+	}
+
+	@Override
+	public void clearChoices() {
+		lvResults.clearChoices();
+	}
+
+	@Override
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
 	}
@@ -111,25 +136,5 @@ public class ProPCView extends PCView implements IHelperView {
 		}
 
 		return etSelected;
-	}
-
-	public int getSelectedPosition() {
-		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
-	}
-
-	public void showController() {
-		controller.setVisibility(View.VISIBLE);
-	}
-
-	public void hideController() {
-		controller.setVisibility(View.GONE);
-	}
-
-	public void setSelectedPosition(int pos) {
-		((ProDefaultAdapter) resultsAdapter).setSelectedPos(pos);
-	}
-
-	public void clearChoices() {
-		lvResults.clearChoices();
 	}
 }
