@@ -1,7 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.pc;
 
 import me.nickpierson.StatsCalculator.pc.PCActivity;
-import me.nickpierson.StatsCalculator.pc.PCModel;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +11,9 @@ public class ProPCActivity extends PCActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		model = new PCModel();
+		model = new ProPCModel();
 		view = new ProPCView(this);
-		ProPCPresenter.create(this, model, (ProPCView) view);
+		ProPCPresenter.create(this, (ProPCModel) model, (ProPCView) view);
 
 		setContentView(view.getView());
 	}

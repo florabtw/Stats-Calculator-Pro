@@ -1,11 +1,13 @@
 package me.nickpierson.StatsCalculatorPro;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.thecellutioncenter.mvplib.ActionListener;
 import com.thecellutioncenter.mvplib.DataActionHandler;
 import com.thecellutioncenter.mvplib.DataActionListener;
 
@@ -19,6 +21,7 @@ public class ProHelper implements IProHelper {
 		}
 	}
 
+	@Override
 	public <T extends DataActionHandler & IHelperView> void listenForItemClick(final T view, final Enum<?> type) {
 		view.addListener(new DataActionListener() {
 			@Override
@@ -33,6 +36,38 @@ public class ProHelper implements IProHelper {
 					view.setSelectedPosition(newPosition);
 				} else {
 					deselect(view);
+				}
+			}
+		}, type);
+	}
+
+	@Override
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				if (currPos != 0) {
+					ArrayList<String> currItems = view.getAllItems();
+					model.moveItemUp(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos - 1);
+				}
+			}
+		}, type);
+	}
+
+	@Override
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				ArrayList<String> currItems = view.getAllItems();
+				if (currPos != currItems.size() - 1) {
+					model.moveItemDown(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos + 1);
 				}
 			}
 		}, type);

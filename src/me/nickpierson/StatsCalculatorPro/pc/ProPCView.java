@@ -1,5 +1,6 @@
 package me.nickpierson.StatsCalculatorPro.pc;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.pc.PCView;
@@ -10,11 +11,13 @@ import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,7 +25,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -36,6 +39,8 @@ public class ProPCView extends PCView implements IHelperView {
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.pro_results_controller);
 		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
+		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
+		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveDown);
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -65,6 +70,19 @@ public class ProPCView extends PCView implements IHelperView {
 				dataEvent(ProTypes.ITEM_CLICK, map);
 			}
 		});
+
+		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
+		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
+	}
+
+	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				event(type);
+			}
+		});
 	}
 
 	@Override
@@ -92,6 +110,28 @@ public class ProPCView extends PCView implements IHelperView {
 	@Override
 	public void setSelectedPosition(int pos) {
 		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
+	}
+
+	@Override
+	public void highlightAndSelect(int pos) {
+		setSelectedPosition(pos);
+		lvResults.setItemChecked(pos, true);
+	}
+
+	@Override
+	public ArrayList<String> getAllItems() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (int i = 0; i < resultsAdapter.getCount(); i++) {
+			result.add(resultsAdapter.getItem(i));
+		}
+
+		return result;
+	}
+
+	@Override
+	public void replaceItems(ArrayList<String> items) {
+		resultsAdapter.clear();
+		resultsAdapter.addMultiple(items);
 	}
 
 	@Override

@@ -22,31 +22,9 @@ public class ProBasicPresenter extends BasicPresenter {
 
 		proHelper.listenForItemClick(view, ProBasicView.ProTypes.ITEM_CLICK);
 
-		view.addListener(new ActionListener() {
-			@Override
-			public void fire() {
-				int currPos = view.getSelectedPosition();
-				if (currPos != 0) {
-					ArrayList<String> currItems = view.getAllItems();
-					model.moveItemUp(currPos, currItems);
-					view.replaceItems(currItems);
-					view.highlightAndSelect(currPos - 1);
-				}
-			}
-		}, ProBasicView.ProTypes.MOVE_UP);
+		proHelper.listenForMoveUpClick(view, model, ProBasicView.ProTypes.MOVE_UP);
 
-		view.addListener(new ActionListener() {
-			@Override
-			public void fire() {
-				int currPos = view.getSelectedPosition();
-				ArrayList<String> currItems = view.getAllItems();
-				if (currPos != currItems.size() - 1) {
-					model.moveItemDown(currPos, currItems);
-					view.replaceItems(currItems);
-					view.highlightAndSelect(currPos + 1);
-				}
-			}
-		}, ProBasicView.ProTypes.MOVE_DOWN);
+		proHelper.listenForMoveDownClick(view, model, ProBasicView.ProTypes.MOVE_DOWN);
 
 		view.addListener(new ActionListener() {
 
