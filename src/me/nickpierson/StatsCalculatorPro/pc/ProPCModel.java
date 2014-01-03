@@ -12,6 +12,11 @@ public class ProPCModel extends PCModel implements IHelperModel {
 		moveItem(currItems, pos, pos - 1);
 	}
 
+	@Override
+	public void moveItemDown(int pos, ArrayList<String> currItems) {
+		moveItem(currItems, pos, pos + 1);
+	}
+
 	private void moveItem(ArrayList<String> items, int pos, int desiredPos) {
 		String item = items.remove(pos);
 		items.add(desiredPos, item);

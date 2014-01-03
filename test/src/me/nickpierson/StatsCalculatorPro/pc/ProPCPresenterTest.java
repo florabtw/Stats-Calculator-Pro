@@ -166,6 +166,39 @@ public class ProPCPresenterTest extends PCPresenterTest {
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 
+	@Test
+	public void whenMovedDownButtonIsClicked_ThenCurrentSelectedItemShouldMoveDown() {
+		int testPos = 1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel).moveItemDown(testPos, testItems);
+		verify(proView).replaceItems(testItems);
+		verify(proView).highlightAndSelect(testPos + 1);
+	}
+
+	@Test
+	public void whenMoveDownButtonIsClickedWhenBottomItemIsSelected_ThenNothingShouldHappen() {
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(2);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemDown(0, testItems);
+		verify(proView, never()).replaceItems(testItems);
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
+
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (String item : args) {

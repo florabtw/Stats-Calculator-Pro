@@ -21,6 +21,7 @@ public class ProHelper implements IProHelper {
 		}
 	}
 
+	@Override
 	public <T extends DataActionHandler & IHelperView> void listenForItemClick(final T view, final Enum<?> type) {
 		view.addListener(new DataActionListener() {
 			@Override
@@ -40,6 +41,7 @@ public class ProHelper implements IProHelper {
 		}, type);
 	}
 
+	@Override
 	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, final Enum<?> type) {
 		view.addListener(new ActionListener() {
 			@Override
@@ -50,6 +52,23 @@ public class ProHelper implements IProHelper {
 					model.moveItemUp(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos - 1);
+				}
+			}
+		}, type);
+	}
+
+	@Override
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, final Enum<?> type) {
+		// TODO pull out common method here and above
+		view.addListener(new ActionListener() {
+			@Override
+			public void fire() {
+				int currPos = view.getSelectedPosition();
+				ArrayList<String> currItems = view.getAllItems();
+				if (currPos != currItems.size() - 1) {
+					model.moveItemDown(currPos, currItems);
+					view.replaceItems(currItems);
+					view.highlightAndSelect(currPos + 1);
 				}
 			}
 		}, type);

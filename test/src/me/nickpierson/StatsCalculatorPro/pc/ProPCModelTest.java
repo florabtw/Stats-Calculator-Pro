@@ -36,6 +36,17 @@ public class ProPCModelTest extends PCModelTest {
 
 		assertEquals(expectedOutput, testItems);
 	}
+	
+	@Test
+	public void moveItemDown_ReturnsDesiredItemMovedDownByOne() {
+		int testPos = 1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedOutput = makeStringList("First", "Third", "Second");
+
+		proModel.moveItemDown(testPos, testItems);
+
+		assertEquals(expectedOutput, testItems);
+	}
 
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
