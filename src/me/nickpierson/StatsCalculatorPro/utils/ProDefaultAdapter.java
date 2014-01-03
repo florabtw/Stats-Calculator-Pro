@@ -1,20 +1,18 @@
-package me.nickpierson.StatsCalculatorPro.pc;
+package me.nickpierson.StatsCalculatorPro.utils;
 
-import me.nickpierson.StatsCalculator.pc.PCAdapter;
+import me.nickpierson.StatsCalculator.utils.DefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProPCAdapter extends PCAdapter {
+public class ProDefaultAdapter extends DefaultAdapter {
 
 	private int selectedPos;
 
-	public ProPCAdapter(Context context, int resource) {
-		super(context, resource);
+	public ProDefaultAdapter(Context context, int resource, int titleId, int resultId) {
+		super(context, resource, titleId, resultId);
 		selectedPos = -1;
-		
-		//TODO refactor all of these adapters. Honestly, there needs to be only one between both PC & Basic for all 3 projects
 	}
 
 	@Override
@@ -38,5 +36,4 @@ public class ProPCAdapter extends PCAdapter {
 		notifyDataSetChanged();
 		this.selectedPos = position;
 	}
-
 }

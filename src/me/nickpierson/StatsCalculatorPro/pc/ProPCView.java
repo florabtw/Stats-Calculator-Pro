@@ -5,6 +5,7 @@ import java.util.HashMap;
 import me.nickpierson.StatsCalculator.pc.PCView;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
+import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class ProPCView extends PCView implements IHelperView {
 	private LinearLayout controller;
 
 	public ProPCView(Activity activity) {
-		super(activity, new ProPCAdapter(activity, R.layout.perm_comb_results_item));
+		super(activity, new ProDefaultAdapter(activity, R.layout.perm_comb_results_item, R.id.pc_tvResultsTitle, R.id.pc_tvResultsResult));
 
 		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.pro_results_controller);
@@ -113,7 +114,7 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	public int getSelectedPosition() {
-		return ((ProPCAdapter) resultsAdapter).getSelectedPosition();
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
 	}
 
 	public void showController() {
@@ -125,7 +126,7 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	public void setSelectedPosition(int pos) {
-		((ProPCAdapter) resultsAdapter).setSelectedPos(pos);
+		((ProDefaultAdapter) resultsAdapter).setSelectedPos(pos);
 	}
 
 	public void clearChoices() {

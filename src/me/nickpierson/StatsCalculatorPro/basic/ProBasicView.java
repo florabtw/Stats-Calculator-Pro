@@ -8,6 +8,7 @@ import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
+import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -59,7 +60,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 		proResults.addView(lvResults, 0, params);
 
-		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
+		resultsAdapter = new ProDefaultAdapter(activity, R.layout.basic_result_item, R.id.basic_tvResultTitle, R.id.basic_tvResultAnswer);
 		resultsAdapter.addMultiple(results);
 
 		lvResults.setAdapter(resultsAdapter);
@@ -130,11 +131,11 @@ public class ProBasicView extends BasicView implements IHelperView {
 	}
 
 	public void setSelectedPosition(int pos) {
-		((ProBasicAdapter) resultsAdapter).setSelectedPos(pos);
+		((ProDefaultAdapter) resultsAdapter).setSelectedPos(pos);
 	}
 
 	public int getSelectedPosition() {
-		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
 	}
 
 	public String getSelectedItem() {
