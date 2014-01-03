@@ -1,6 +1,5 @@
 package me.nickpierson.StatsCalculatorPro.basic;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.nickpierson.StatsCalculator.basic.BasicPresenter;
@@ -26,22 +25,7 @@ public class ProBasicPresenter extends BasicPresenter {
 
 		proHelper.listenForMoveDownClick(view, model, ProBasicView.ProTypes.MOVE_DOWN);
 
-		view.addListener(new ActionListener() {
-
-			@Override
-			public void fire() {
-				int currPos = view.getSelectedPosition();
-				ArrayList<String> currItems = view.getAllItems();
-				currItems.remove(currPos);
-				view.replaceItems(currItems);
-
-				if (currItems.size() == 0) {
-					view.hideController();
-				} else if (currPos == currItems.size()) {
-					view.highlightAndSelect(currPos - 1);
-				}
-			}
-		}, ProBasicView.ProTypes.REMOVE);
+		proHelper.listenForRemoveClick(view, ProBasicView.ProTypes.REMOVE);
 
 		view.addListener(new ActionListener() {
 

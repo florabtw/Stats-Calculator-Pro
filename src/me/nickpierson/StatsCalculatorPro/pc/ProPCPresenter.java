@@ -18,5 +18,7 @@ public class ProPCPresenter extends PCPresenter {
 		proHelper.listenForMoveUpClick(view, model, ProPCView.ProTypes.MOVE_UP);
 
 		proHelper.listenForMoveDownClick(view, model, ProPCView.ProTypes.MOVE_DOWN);
+
+		proHelper.listenForRemoveClick(view, ProPCView.ProTypes.REMOVE);
 	}
 }

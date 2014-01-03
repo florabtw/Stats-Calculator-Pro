@@ -25,7 +25,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -41,6 +41,7 @@ public class ProPCView extends PCView implements IHelperView {
 		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
 		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveDown);
+		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.pro_results_btnRemove);
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -73,6 +74,7 @@ public class ProPCView extends PCView implements IHelperView {
 
 		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
 		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
+		eventOnClick(btnRemove, ProTypes.REMOVE);
 	}
 
 	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {

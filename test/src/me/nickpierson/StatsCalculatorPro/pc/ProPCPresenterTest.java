@@ -199,6 +199,52 @@ public class ProPCPresenterTest extends PCPresenterTest {
 		verify(proView, never()).highlightAndSelect(any(Integer.class));
 	}
 
+	@Test
+	public void whenRemoveButtonIsPressed_ThenSelectedItemIsRemoved() {
+		int testPos = 1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		ArrayList<String> expectedItems = makeStringList("First", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).replaceItems(expectedItems);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedOnLastItem_ThenTheNextLastItemShouldBeManuallySelected() {
+		int testPos = 2;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).highlightAndSelect(testPos - 1);
+	}
+
+	@Test
+	public void whenRemoveButtonIsPressedForOnlyItem_ThenControllerDisappears() {
+		int testPos = 0;
+		ArrayList<String> testItems = makeStringList("First");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+
+		verify(proView).hideController();
+	}
+
 	private ArrayList<String> makeStringList(String... args) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (String item : args) {
