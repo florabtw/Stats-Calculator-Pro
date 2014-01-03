@@ -12,10 +12,8 @@ public class ProPCPresenter extends PCPresenter {
 	public static void create(final Activity activity, final PCModel model, final ProPCView view) {
 		setup(model, view);
 
-		handleWakeLock(activity, view);
-	}
-
-	private static void handleWakeLock(Activity activity, ProPCView view) {
 		proHelper.handleWakeLock(activity, view);
+
+		proHelper.listenForItemClick(view, ProPCView.ProTypes.ITEM_CLICK);
 	}
 }

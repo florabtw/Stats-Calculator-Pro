@@ -1,17 +1,17 @@
-package me.nickpierson.StatsCalculatorPro.basic;
+package me.nickpierson.StatsCalculatorPro.utils;
 
-import me.nickpierson.StatsCalculator.basic.BasicAdapter;
+import me.nickpierson.StatsCalculator.utils.DefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.R;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProBasicAdapter extends BasicAdapter {
+public class ProDefaultAdapter extends DefaultAdapter {
 
 	private int selectedPos;
 
-	public ProBasicAdapter(Context context, int resource) {
-		super(context, resource);
+	public ProDefaultAdapter(Context context, int resource, int titleId, int resultId) {
+		super(context, resource, titleId, resultId);
 		selectedPos = -1;
 	}
 
@@ -32,7 +32,7 @@ public class ProBasicAdapter extends BasicAdapter {
 		return selectedPos;
 	}
 
-	public void setSelectedPos(int position) {
+	public void setSelectedPosition(int position) {
 		notifyDataSetChanged();
 		this.selectedPos = position;
 	}

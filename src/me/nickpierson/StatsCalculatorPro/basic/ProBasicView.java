@@ -8,6 +8,7 @@ import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
+import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -39,31 +40,20 @@ public class ProBasicView extends BasicView implements IHelperView {
 	private LinearLayout controller;
 
 	public ProBasicView(Activity activity, ArrayList<String> results) {
-		super(activity);
+		super(activity, new ProDefaultAdapter(activity, R.layout.basic_result_item, R.id.basic_tvResultTitle, R.id.basic_tvResultAnswer));
 
-		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic, null);
-		controller = (LinearLayout) proResults.findViewById(R.id.basic_controller);
-		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.basic_btnMoveUp);
-		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.basic_btnMoveDown);
-		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.basic_btnRemove);
-		ImageButton btnInfo = (ImageButton) controller.findViewById(R.id.basic_btnInfo);
-
-		/*
-		 * Align with parent top. Put above the 'controller' and align with
-		 * parent (bottom) if 'controller' is missing
-		 */
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 0);
-		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-		params.addRule(RelativeLayout.ABOVE, R.id.basic_controller);
-		params.alignWithParent = true;
-
-		proResults.addView(lvResults, 0, params);
-
-		resultsAdapter = new ProBasicAdapter(activity, R.layout.basic_result_item);
-		resultsAdapter.addMultiple(results);
+		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
+		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
+		controller = (LinearLayout) proResults.findViewById(R.id.pro_results_controller);
+		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
+		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveDown);
+		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.pro_results_btnRemove);
+		ImageButton btnInfo = (ImageButton) controller.findViewById(R.id.pro_results_btnInfo);
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		resultsAdapter.addMultiple(results);
+		flFrame.addView(proResults);
 
 		proKeypadHelper = new ProKeypadHelper(activity);
 		ImageButton btnBackspace = (ImageButton) tlKeypad.findViewById(R.id.keypad_backspace);
@@ -119,22 +109,27 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public void showResults() {
 		flFrame.removeAllViews();
 		flFrame.addView(proResults);
+		resultsAdapter.notifyDataSetChanged();
 	}
 
+	@Override
 	public void showController() {
 		controller.setVisibility(View.VISIBLE);
 	}
 
+	@Override
 	public void hideController() {
 		controller.setVisibility(View.GONE);
 	}
 
-	public void setSelectedPosition(int pos) {
-		((ProBasicAdapter) resultsAdapter).setSelectedPos(pos);
+	@Override
+	public int getSelectedPosition() {
+		return ((ProDefaultAdapter) resultsAdapter).getSelectedPosition();
 	}
 
-	public int getSelectedPosition() {
-		return ((ProBasicAdapter) resultsAdapter).getSelectedPosition();
+	@Override
+	public void setSelectedPosition(int pos) {
+		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
 	}
 
 	public String getSelectedItem() {
@@ -160,6 +155,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		resultsAdapter.addMultiple(items);
 	}
 
+	@Override
 	public void clearChoices() {
 		lvResults.clearChoices();
 	}
@@ -197,6 +193,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		}
 	}
 
+	@Override
 	public void wakeLock() {
 		view.setKeepScreenOn(true);
 	}
