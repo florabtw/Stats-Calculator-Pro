@@ -59,7 +59,6 @@ public class ProHelper implements IProHelper {
 
 	@Override
 	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, final Enum<?> type) {
-		// TODO pull out common method here and above
 		view.addListener(new ActionListener() {
 			@Override
 			public void fire() {

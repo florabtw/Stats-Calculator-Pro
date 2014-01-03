@@ -10,6 +10,7 @@
 
         Perm & Comb:
 - Screen stays on if preference is set
+- Move items up and down
 
         Keypad:
 - Vibrate feedback on keypress if preference is set
