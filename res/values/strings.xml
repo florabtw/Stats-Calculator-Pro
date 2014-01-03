@@ -13,6 +13,6 @@
     <string name="down_arrow_desc">down arrow</string>
     <string name="remove_desc">remove list item</string>
     <string name="about_desc">about list item</string>
-    <string name="pro_basic_recover">Reset list</string>
+    <string name="pro_basic_recover">Restore Results</string>
 
 </resources>
