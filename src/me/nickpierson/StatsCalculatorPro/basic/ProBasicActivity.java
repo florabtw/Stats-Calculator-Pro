@@ -64,6 +64,26 @@ public class ProBasicActivity extends BasicActivity {
 	}
 
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putInt(ProConstants.SELECTED_POS_KEY, ((ProBasicView) view).getSelectedPosition());
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+
+		if (savedInstanceState != null) {
+			int lastPosition = savedInstanceState.getInt(ProConstants.SELECTED_POS_KEY);
+			if (lastPosition != -1) {
+				((ProBasicView) view).setSelectedPosition(lastPosition);
+				((ProBasicView) view).showController();
+			}
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pro_shared, menu);
 		return super.onCreateOptionsMenu(menu);
