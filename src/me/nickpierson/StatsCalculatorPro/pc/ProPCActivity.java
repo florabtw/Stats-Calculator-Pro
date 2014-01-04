@@ -62,6 +62,26 @@ public class ProPCActivity extends PCActivity {
 	}
 
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putInt(ProConstants.SELECTED_POS_KEY, ((ProPCView) view).getSelectedPosition());
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+
+		if (savedInstanceState != null) {
+			int lastPosition = savedInstanceState.getInt(ProConstants.SELECTED_POS_KEY);
+			if (lastPosition != -1) {
+				((ProPCView) view).setSelectedPosition(lastPosition);
+				((ProPCView) view).showController();
+			}
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.pro_shared, menu);
 		return super.onCreateOptionsMenu(menu);
