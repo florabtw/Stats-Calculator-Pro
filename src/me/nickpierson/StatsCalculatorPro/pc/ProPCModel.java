@@ -41,6 +41,7 @@ public class ProPCModel extends PCModel implements IHelperModel {
 		items.add(desiredPos, item);
 	}
 
+	@Override
 	public String getEquationUrl(String key) {
 		return urlMap.get(key);
 	}
