@@ -105,6 +105,20 @@ public class ProHelper implements IProHelper {
 		}, type);
 	}
 
+	@Override
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForInfoClick(final T view, final U model, final Enum<?> type) {
+		view.addListener(new ActionListener() {
+
+			@Override
+			public void fire() {
+				String selection = view.getSelectedItem();
+				String url = model.getEquationUrl(selection);
+				view.displayItemInfo(url);
+			}
+		}, type);
+
+	}
+
 	private <T extends DataActionHandler & IHelperView> void deselect(T view) {
 		view.setSelectedPosition(-1);
 		view.clearChoices();

@@ -7,7 +7,6 @@ import me.nickpierson.StatsCalculatorPro.ProHelper;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.app.Activity;
 
-import com.thecellutioncenter.mvplib.ActionListener;
 import com.thecellutioncenter.mvplib.DataActionListener;
 
 public class ProBasicPresenter extends BasicPresenter {
@@ -27,15 +26,7 @@ public class ProBasicPresenter extends BasicPresenter {
 
 		proHelper.listenForRemoveClick(view, ProBasicView.ProTypes.REMOVE);
 
-		view.addListener(new ActionListener() {
-
-			@Override
-			public void fire() {
-				String selection = view.getSelectedItem();
-				String url = model.getEquationUrl(selection);
-				view.displayItemInfo(url);
-			}
-		}, ProBasicView.ProTypes.INFO);
+		proHelper.listenForInfoClick(view, model, ProBasicView.ProTypes.INFO);
 
 		proHelper.listenForResetList(view, ProBasicView.ProTypes.MENU_RESET_LIST);
 

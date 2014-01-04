@@ -132,6 +132,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		((ProDefaultAdapter) resultsAdapter).setSelectedPosition(pos);
 	}
 
+	@Override
 	public String getSelectedItem() {
 		return resultsAdapter.getItem(getSelectedPosition());
 	}
@@ -170,10 +171,11 @@ public class ProBasicView extends BasicView implements IHelperView {
 		resultsAdapter.addMultiple(ProConstants.PRO_BASIC_TITLES);
 	}
 
+	@Override
 	@SuppressLint("SetJavaScriptEnabled")
 	public void displayItemInfo(String url) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-		WebView view = (WebView) LayoutInflater.from(activity).inflate(R.layout.pro_basic_webview, null);
+		WebView view = (WebView) LayoutInflater.from(activity).inflate(R.layout.pro_shared_webview, null);
 		view.loadUrl(url);
 		view.getSettings().setJavaScriptEnabled(true);
 		dialog.setView(view);
