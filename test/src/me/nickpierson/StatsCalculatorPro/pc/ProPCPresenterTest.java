@@ -13,6 +13,7 @@ import java.util.HashMap;
 import me.nickpierson.StatsCalculator.pc.PCPresenterTest;
 import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.R;
+import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -274,6 +275,21 @@ public class ProPCPresenterTest extends PCPresenterTest {
 
 		verify(proModel).getEquationUrl(selection);
 		verify(proView).displayItemInfo(url);
+	}
+
+	@Test
+	public void whenItemIsLongClicked_ThenResultIsCopiedToClipboard() {
+		HashMap<Enum<?>, Integer> testMap = new HashMap<Enum<?>, Integer>();
+		int testPos = 2;
+		testMap.put(ProPCView.ProTypes.LONG_ITEM_CLICK, testPos);
+		createPresenter();
+
+		verify(proView).addListener(dataListener.capture(), eq(ProPCView.ProTypes.LONG_ITEM_CLICK));
+
+		dataListener.getValue().fire(testMap);
+
+		verify(proView).copyItemToClipboard(testPos);
+		verify(proView).showToast(ProConstants.COPY_NOTIFICATION);
 	}
 
 	private ArrayList<String> makeStringList(String... args) {

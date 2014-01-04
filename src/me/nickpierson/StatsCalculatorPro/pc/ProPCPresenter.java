@@ -24,5 +24,7 @@ public class ProPCPresenter extends PCPresenter {
 		proHelper.listenForResetList(view, ProPCView.ProTypes.MENU_RESET_LIST);
 
 		proHelper.listenForInfoClick(view, model, ProPCView.ProTypes.INFO);
+
+		proHelper.listenForLongItemClick(view, ProPCView.ProTypes.LONG_ITEM_CLICK);
 	}
 }
