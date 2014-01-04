@@ -23,4 +23,8 @@ public interface IHelperView {
 	public void highlightAndSelect(int pos);
 
 	public void resetList();
+
+	public String getSelectedItem();
+
+	public void displayItemInfo(String url);
 }

@@ -9,11 +9,14 @@ import me.nickpierson.StatsCalculatorPro.IHelperView;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -26,7 +29,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST, INFO;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -43,6 +46,7 @@ public class ProPCView extends PCView implements IHelperView {
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
 		ImageButton btnMoveDown = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveDown);
 		ImageButton btnRemove = (ImageButton) controller.findViewById(R.id.pro_results_btnRemove);
+		ImageButton btnInfo = (ImageButton) controller.findViewById(R.id.pro_results_btnInfo);
 
 		lvResults.setAdapter(resultsAdapter);
 		lvResults.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -77,6 +81,7 @@ public class ProPCView extends PCView implements IHelperView {
 		eventOnClick(btnMoveUp, ProTypes.MOVE_UP);
 		eventOnClick(btnMoveDown, ProTypes.MOVE_DOWN);
 		eventOnClick(btnRemove, ProTypes.REMOVE);
+		eventOnClick(btnInfo, ProTypes.INFO);
 	}
 
 	private void eventOnClick(ImageButton button, final Enum<ProTypes> type) {
@@ -117,6 +122,11 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	@Override
+	public String getSelectedItem() {
+		return resultsAdapter.getItem(getSelectedPosition());
+	}
+
+	@Override
 	public void highlightAndSelect(int pos) {
 		setSelectedPosition(pos);
 		lvResults.setItemChecked(pos, true);
@@ -147,6 +157,17 @@ public class ProPCView extends PCView implements IHelperView {
 	public void resetList() {
 		resultsAdapter.clear();
 		resultsAdapter.addMultiple(Constants.PC_TITLES);
+	}
+
+	@Override
+	@SuppressLint("SetJavaScriptEnabled")
+	public void displayItemInfo(String url) {
+		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+		WebView view = (WebView) LayoutInflater.from(activity).inflate(R.layout.pro_basic_webview, null);
+		view.loadUrl(url);
+		view.getSettings().setJavaScriptEnabled(true);
+		dialog.setView(view);
+		dialog.show();
 	}
 
 	@Override

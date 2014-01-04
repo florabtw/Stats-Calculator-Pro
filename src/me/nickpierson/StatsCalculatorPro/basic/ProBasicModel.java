@@ -96,6 +96,7 @@ public class ProBasicModel extends BasicModel implements IHelperModel {
 		items.add(desiredPos, item);
 	}
 
+	@Override
 	public String getEquationUrl(String key) {
 		return urlMap.get(key);
 	}
