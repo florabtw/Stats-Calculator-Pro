@@ -5,50 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/pro_lv_results"
-        style="@style/listview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@+id/pro_results_controller"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true" >
-    </ListView>
+    <include layout="@layout/pro_listview" />
 
-    <LinearLayout
-        android:id="@+id/pro_results_controller"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="6dp"
-        android:visibility="gone" >
-
-        <ImageButton
-            android:id="@+id/pro_results_btnMoveUp"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
-            android:contentDescription="@string/up_arrow_desc"
-            android:src="@drawable/ic_up_arrow" />
-
-        <ImageButton
-            android:id="@+id/pro_results_btnMoveDown"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
-            android:contentDescription="@string/down_arrow_desc"
-            android:src="@drawable/ic_down_arrow" />
-
-        <ImageButton
-            android:id="@+id/pro_results_btnRemove"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
-            android:contentDescription="@string/remove_desc"
-            android:src="@drawable/ic_remove" />
-
-        <ImageButton
-            android:id="@+id/pro_results_btnInfo"
-            style="@style/controller_button"
-            android:contentDescription="@string/about_desc"
-            android:src="@drawable/ic_about" />
-    </LinearLayout>
+    <include layout="@layout/pro_controller" />
 
 </RelativeLayout>
