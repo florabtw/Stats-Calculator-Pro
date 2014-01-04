@@ -10,4 +10,5 @@ public class ProConstants {
 
 	public static final String COPY_NOTIFICATION = "Copied to Clipboard";
 	public static final String RESULTS_KEY = "results order";
+	public static final String SELECTED_POS_KEY = "selected pos";
 }
