@@ -27,4 +27,8 @@ public interface IHelperView {
 	public String getSelectedItem();
 
 	public void displayItemInfo(String url);
+
+	public void copyItemToClipboard(int pos);
+
+	public void showToast(String toast);
 }

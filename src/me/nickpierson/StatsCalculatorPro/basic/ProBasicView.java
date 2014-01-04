@@ -182,6 +182,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 		dialog.show();
 	}
 
+	@Override
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	public void copyItemToClipboard(int itemPos) {

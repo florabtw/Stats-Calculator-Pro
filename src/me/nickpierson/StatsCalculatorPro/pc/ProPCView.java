@@ -12,6 +12,8 @@ import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +21,7 @@ import android.view.View.OnLongClickListener;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,7 +32,7 @@ import android.widget.RelativeLayout;
 public class ProPCView extends PCView implements IHelperView {
 
 	public enum ProTypes {
-		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST, INFO;
+		ITEM_CLICK, MOVE_UP, MOVE_DOWN, REMOVE, MENU_RESET_LIST, INFO, LONG_ITEM_CLICK;
 	}
 
 	ProKeypadHelper proKeypadHelper;
@@ -75,6 +78,16 @@ public class ProPCView extends PCView implements IHelperView {
 				HashMap<Enum<?>, Integer> map = new HashMap<Enum<?>, Integer>();
 				map.put(ProTypes.ITEM_CLICK, pos);
 				dataEvent(ProTypes.ITEM_CLICK, map);
+			}
+		});
+
+		lvResults.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> adapter, View view, int pos, long id) {
+				HashMap<Enum<?>, Integer> map = new HashMap<Enum<?>, Integer>();
+				map.put(ProTypes.LONG_ITEM_CLICK, pos);
+				dataEvent(ProTypes.LONG_ITEM_CLICK, map);
+				return true;
 			}
 		});
 
@@ -168,6 +181,24 @@ public class ProPCView extends PCView implements IHelperView {
 		view.getSettings().setJavaScriptEnabled(true);
 		dialog.setView(view);
 		dialog.show();
+	}
+
+	@Override
+	@SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
+	public void copyItemToClipboard(int itemPos) {
+		String selectedItem = resultsAdapter.getItem(itemPos);
+		String selectedResult = resultsAdapter.getResults().get(selectedItem);
+
+		int sdk = android.os.Build.VERSION.SDK_INT;
+		if (sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+			clipboard.setText(selectedResult);
+		} else {
+			android.content.ClipboardManager clipboard = (android.content.ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+			ClipData clip = ClipData.newPlainText(selectedItem, selectedResult);
+			clipboard.setPrimaryClip(clip);
+		}
 	}
 
 	@Override

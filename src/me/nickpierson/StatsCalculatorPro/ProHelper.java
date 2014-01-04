@@ -3,6 +3,7 @@ package me.nickpierson.StatsCalculatorPro;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -42,7 +43,7 @@ public class ProHelper implements IProHelper {
 	}
 
 	@Override
-	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, final Enum<?> type) {
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveUpClick(final T view, final U model, Enum<?> type) {
 		view.addListener(new ActionListener() {
 			@Override
 			public void fire() {
@@ -58,7 +59,7 @@ public class ProHelper implements IProHelper {
 	}
 
 	@Override
-	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, final Enum<?> type) {
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForMoveDownClick(final T view, final U model, Enum<?> type) {
 		view.addListener(new ActionListener() {
 			@Override
 			public void fire() {
@@ -74,7 +75,7 @@ public class ProHelper implements IProHelper {
 	}
 
 	@Override
-	public <T extends DataActionHandler & IHelperView> void listenForRemoveClick(final T view, final Enum<?> type) {
+	public <T extends DataActionHandler & IHelperView> void listenForRemoveClick(final T view, Enum<?> type) {
 		view.addListener(new ActionListener() {
 
 			@Override
@@ -94,7 +95,7 @@ public class ProHelper implements IProHelper {
 	}
 
 	@Override
-	public <T extends DataActionHandler & IHelperView> void listenForResetList(final T view, final Enum<?> type) {
+	public <T extends DataActionHandler & IHelperView> void listenForResetList(final T view, Enum<?> type) {
 		view.addListener(new ActionListener() {
 
 			@Override
@@ -106,7 +107,7 @@ public class ProHelper implements IProHelper {
 	}
 
 	@Override
-	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForInfoClick(final T view, final U model, final Enum<?> type) {
+	public <T extends DataActionHandler & IHelperView, U extends IHelperModel> void listenForInfoClick(final T view, final U model, Enum<?> type) {
 		view.addListener(new ActionListener() {
 
 			@Override
@@ -117,6 +118,19 @@ public class ProHelper implements IProHelper {
 			}
 		}, type);
 
+	}
+
+	@Override
+	public <T extends DataActionHandler & IHelperView> void listenForLongItemClick(final T view, final Enum<?> type) {
+		view.addListener(new DataActionListener() {
+
+			@Override
+			public void fire(HashMap<Enum<?>, ?> data) {
+				int itemPos = (Integer) data.get(type);
+				view.copyItemToClipboard(itemPos);
+				view.showToast(ProConstants.COPY_NOTIFICATION);
+			}
+		}, type);
 	}
 
 	private <T extends DataActionHandler & IHelperView> void deselect(T view) {
