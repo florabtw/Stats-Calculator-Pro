@@ -48,7 +48,7 @@ public class ProHelper implements IProHelper {
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
-				if (currPos != 0) {
+				if (currPos > 0) {
 					ArrayList<String> currItems = view.getAllItems();
 					model.moveItemUp(currPos, currItems);
 					view.replaceItems(currItems);
@@ -65,7 +65,7 @@ public class ProHelper implements IProHelper {
 			public void fire() {
 				int currPos = view.getSelectedPosition();
 				ArrayList<String> currItems = view.getAllItems();
-				if (currPos != currItems.size() - 1) {
+				if (currPos != -1 && currPos != currItems.size() - 1) {
 					model.moveItemDown(currPos, currItems);
 					view.replaceItems(currItems);
 					view.highlightAndSelect(currPos + 1);
@@ -81,14 +81,16 @@ public class ProHelper implements IProHelper {
 			@Override
 			public void fire() {
 				int currPos = view.getSelectedPosition();
-				ArrayList<String> currItems = view.getAllItems();
-				currItems.remove(currPos);
-				view.replaceItems(currItems);
+				if (currPos != -1) {
+					ArrayList<String> currItems = view.getAllItems();
+					currItems.remove(currPos);
+					view.replaceItems(currItems);
 
-				if (currItems.size() == 0) {
-					view.hideController();
-				} else if (currPos == currItems.size()) {
-					view.highlightAndSelect(currPos - 1);
+					if (currItems.size() == 0) {
+						view.hideController();
+					} else if (currPos == currItems.size()) {
+						view.highlightAndSelect(currPos - 1);
+					}
 				}
 			}
 		}, type);
@@ -113,8 +115,10 @@ public class ProHelper implements IProHelper {
 			@Override
 			public void fire() {
 				String selection = view.getSelectedItem();
-				String url = model.getEquationUrl(selection);
-				view.displayItemInfo(url);
+				if (selection.length() != 0) {
+					String url = model.getEquationUrl(selection);
+					view.displayItemInfo(url);
+				}
 			}
 		}, type);
 

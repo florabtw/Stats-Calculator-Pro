@@ -134,7 +134,14 @@ public class ProBasicView extends BasicView implements IHelperView {
 
 	@Override
 	public String getSelectedItem() {
-		return resultsAdapter.getItem(getSelectedPosition());
+		String item;
+		try {
+			item = resultsAdapter.getItem(getSelectedPosition());
+		} catch (Exception e) {
+			item = "";
+		}
+
+		return item;
 	}
 
 	@Override

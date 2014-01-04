@@ -169,6 +169,22 @@ public class ProPCPresenterTest extends PCPresenterTest {
 	}
 
 	@Test
+	public void whenMoveUpButtonIsClickedWhenNoItemIsSelected_ThenNothingShouldHappen() {
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(-1);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.MOVE_UP));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemUp(0, testItems);
+		verify(proView, never()).replaceItems(testItems);
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
+
+	@Test
 	public void whenMovedDownButtonIsClicked_ThenCurrentSelectedItemShouldMoveDown() {
 		int testPos = 1;
 		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
@@ -189,6 +205,22 @@ public class ProPCPresenterTest extends PCPresenterTest {
 	public void whenMoveDownButtonIsClickedWhenBottomItemIsSelected_ThenNothingShouldHappen() {
 		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
 		when(proView.getSelectedPosition()).thenReturn(2);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.MOVE_DOWN));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).moveItemDown(0, testItems);
+		verify(proView, never()).replaceItems(testItems);
+		verify(proView, never()).highlightAndSelect(any(Integer.class));
+	}
+
+	@Test
+	public void whenMoveDownButtonIsClickedWhenNoItemIsSelected_ThenNothingShouldHappen() {
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(-1);
 		when(proView.getAllItems()).thenReturn(testItems);
 		createPresenter();
 
@@ -248,6 +280,19 @@ public class ProPCPresenterTest extends PCPresenterTest {
 	}
 
 	@Test
+	public void whenRemoveButtonIsPressedWhenNoItemIsSelected_ThenItShouldntThrowException() {
+		int testPos = -1;
+		ArrayList<String> testItems = makeStringList("First", "Second", "Third");
+		when(proView.getSelectedPosition()).thenReturn(testPos);
+		when(proView.getAllItems()).thenReturn(testItems);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.REMOVE));
+
+		listener.getValue().fire();
+	}
+
+	@Test
 	public void whenUserResetsListFromMenu_ThenListShouldBeRestoredToNormalAndNoItemSelected() {
 		createPresenter();
 
@@ -275,6 +320,22 @@ public class ProPCPresenterTest extends PCPresenterTest {
 
 		verify(proModel).getEquationUrl(selection);
 		verify(proView).displayItemInfo(url);
+	}
+
+	@Test
+	public void whenInfoButtonIsPressedWithNoItemSelected_ThenNothingShouldHappen() {
+		String selection = "";
+		String url = "file:///fake/dir";
+		when(proView.getSelectedItem()).thenReturn(selection);
+		when(proModel.getEquationUrl(selection)).thenReturn(url);
+		createPresenter();
+
+		verify(proView).addListener(listener.capture(), eq(ProPCView.ProTypes.INFO));
+
+		listener.getValue().fire();
+
+		verify(proModel, never()).getEquationUrl(selection);
+		verify(proView, never()).displayItemInfo(url);
 	}
 
 	@Test
