@@ -2,51 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <ListView
         android:id="@+id/pro_lv_results"
         style="@style/listview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@+id/pro_results_controller"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true" >
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toLeftOf="@+id/pro_results_controller" >
     </ListView>
 
     <LinearLayout
         android:id="@+id/pro_results_controller"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="6dp"
+        android:orientation="vertical"
         android:visibility="gone" >
 
         <ImageButton
             android:id="@+id/pro_results_btnMoveUp"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
+            style="@style/controller_button_land"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/up_arrow_desc"
             android:src="@drawable/ic_up_arrow" />
 
         <ImageButton
             android:id="@+id/pro_results_btnMoveDown"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
+            style="@style/controller_button_land"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/down_arrow_desc"
             android:src="@drawable/ic_down_arrow" />
 
         <ImageButton
             android:id="@+id/pro_results_btnRemove"
-            style="@style/controller_button"
-            android:layout_marginRight="4dp"
+            style="@style/controller_button_land"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/remove_desc"
             android:src="@drawable/ic_remove" />
 
         <ImageButton
             android:id="@+id/pro_results_btnInfo"
-            style="@style/controller_button"
+            style="@style/controller_button_land"
             android:contentDescription="@string/about_desc"
             android:src="@drawable/ic_about" />
     </LinearLayout>

@@ -43,7 +43,7 @@ public class ProPCView extends PCView implements IHelperView {
 	public ProPCView(Activity activity, ArrayList<String> results) {
 		super(activity, new ProDefaultAdapter(activity, R.layout.perm_comb_results_item, R.id.pc_tvResultsTitle, R.id.pc_tvResultsResult));
 
-		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
+		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_pc_results, null);
 		controller = (LinearLayout) proResults.findViewById(R.id.pro_results_controller);
 		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);

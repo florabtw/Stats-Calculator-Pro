@@ -11,6 +11,11 @@
         Perm & Comb:
 - Screen stays on if preference is set
 - Move items up and down
+- Remove items from list
+- Item position / removal persists
+- Restore (re)moved items using menu
+- Show info on each item
+- Copy result to clipboard on long-click
 
         Keypad:
 - Vibrate feedback on keypress if preference is set
