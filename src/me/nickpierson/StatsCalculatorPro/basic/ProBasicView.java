@@ -42,7 +42,7 @@ public class ProBasicView extends BasicView implements IHelperView {
 	public ProBasicView(Activity activity, ArrayList<String> results) {
 		super(activity, new ProDefaultAdapter(activity, R.layout.basic_result_item, R.id.basic_tvResultTitle, R.id.basic_tvResultAnswer));
 
-		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_results_list, null);
+		proResults = (RelativeLayout) LayoutInflater.from(activity).inflate(R.layout.pro_basic_results, null);
 		lvResults = (ListView) proResults.findViewById(R.id.pro_lv_results);
 		controller = (LinearLayout) proResults.findViewById(R.id.pro_results_controller);
 		ImageButton btnMoveUp = (ImageButton) controller.findViewById(R.id.pro_results_btnMoveUp);
