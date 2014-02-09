@@ -21,11 +21,16 @@ public class ProBasicModel extends BasicModel implements IHelperModel {
 		urlMap = new HashMap<String, String>();
 		urlMap.put(Constants.SIZE, path + "size.html");
 		urlMap.put(Constants.SUM, path + "sum.html");
+		urlMap.put(Constants.MIN, path + "min.html");
+		urlMap.put(Constants.MAX, path + "max.html");
 		urlMap.put(Constants.ARITH_MEAN, path + "arith_mean.html");
 		urlMap.put(Constants.GEO_MEAN, path + "geo_mean.html");
-		urlMap.put(Constants.MEDIAN, path + "median.html");
 		urlMap.put(Constants.MODE, path + "mode.html");
 		urlMap.put(Constants.RANGE, path + "range.html");
+		urlMap.put(Constants.FIRST_QUART, path + "first_quart.html");
+		urlMap.put(Constants.MEDIAN, path + "median.html");
+		urlMap.put(Constants.THIRD_QUART, path + "third_quart.html");
+		urlMap.put(Constants.IQR, path + "iqr.html");
 		urlMap.put(Constants.SAMPLE_VAR, path + "sample_var.html");
 		urlMap.put(Constants.POP_VAR, path + "pop_var.html");
 		urlMap.put(Constants.SAMPLE_DEV, path + "sample_dev.html");

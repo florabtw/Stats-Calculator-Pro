@@ -74,11 +74,16 @@ public class ProBasicModelTest extends BasicModelTest {
 	public void getEquationUrl_ReturnsCorrectUrl() {
 		assertEquals("file:///android_asset/size.html", proModel.getEquationUrl(Constants.SIZE));
 		assertEquals("file:///android_asset/sum.html", proModel.getEquationUrl(Constants.SUM));
+		assertEquals("file:///android_asset/min.html", proModel.getEquationUrl(Constants.MIN));
+		assertEquals("file:///android_asset/max.html", proModel.getEquationUrl(Constants.MAX));
 		assertEquals("file:///android_asset/arith_mean.html", proModel.getEquationUrl(Constants.ARITH_MEAN));
 		assertEquals("file:///android_asset/geo_mean.html", proModel.getEquationUrl(Constants.GEO_MEAN));
-		assertEquals("file:///android_asset/median.html", proModel.getEquationUrl(Constants.MEDIAN));
 		assertEquals("file:///android_asset/mode.html", proModel.getEquationUrl(Constants.MODE));
 		assertEquals("file:///android_asset/range.html", proModel.getEquationUrl(Constants.RANGE));
+		assertEquals("file:///android_asset/first_quart.html", proModel.getEquationUrl(Constants.FIRST_QUART));
+		assertEquals("file:///android_asset/median.html", proModel.getEquationUrl(Constants.MEDIAN));
+		assertEquals("file:///android_asset/third_quart.html", proModel.getEquationUrl(Constants.THIRD_QUART));
+		assertEquals("file:///android_asset/iqr.html", proModel.getEquationUrl(Constants.IQR));
 		assertEquals("file:///android_asset/sample_var.html", proModel.getEquationUrl(Constants.SAMPLE_VAR));
 		assertEquals("file:///android_asset/pop_var.html", proModel.getEquationUrl(Constants.POP_VAR));
 		assertEquals("file:///android_asset/sample_dev.html", proModel.getEquationUrl(Constants.SAMPLE_DEV));
