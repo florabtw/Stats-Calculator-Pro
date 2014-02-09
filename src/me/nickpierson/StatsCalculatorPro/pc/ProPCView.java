@@ -37,7 +37,6 @@ public class ProPCView extends PCView implements IHelperView {
 
 	ProKeypadHelper proKeypadHelper;
 	private RelativeLayout proResults;
-	private ListView lvResults;
 	private LinearLayout controller;
 
 	public ProPCView(Activity activity, ArrayList<String> results) {

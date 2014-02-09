@@ -53,6 +53,8 @@ public class ProPCModelTest extends PCModelTest {
 	public void getEquationUrl_ReturnsCorrectUrl() {
 		assertEquals("file:///android_asset/n_fact.html", proModel.getEquationUrl(Constants.N_FACT));
 		assertEquals("file:///android_asset/r_fact.html", proModel.getEquationUrl(Constants.R_FACT));
+		assertEquals("file:///android_asset/n_subfact.html", proModel.getEquationUrl(Constants.N_SUBFACT));
+		assertEquals("file:///android_asset/r_subfact.html", proModel.getEquationUrl(Constants.R_SUBFACT));
 		assertEquals("file:///android_asset/perm.html", proModel.getEquationUrl(Constants.PERM));
 		assertEquals("file:///android_asset/rep_perm.html", proModel.getEquationUrl(Constants.REP_PERM));
 		assertEquals("file:///android_asset/comb.html", proModel.getEquationUrl(Constants.COMB));

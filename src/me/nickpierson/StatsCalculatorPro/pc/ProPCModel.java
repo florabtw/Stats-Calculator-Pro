@@ -18,6 +18,8 @@ public class ProPCModel extends PCModel implements IHelperModel {
 		urlMap = new HashMap<String, String>();
 		urlMap.put(Constants.N_FACT, path + "n_fact.html");
 		urlMap.put(Constants.R_FACT, path + "r_fact.html");
+		urlMap.put(Constants.N_SUBFACT, path + "n_subfact.html");
+		urlMap.put(Constants.R_SUBFACT, path + "r_subfact.html");
 		urlMap.put(Constants.PERM, path + "perm.html");
 		urlMap.put(Constants.REP_PERM, path + "rep_perm.html");
 		urlMap.put(Constants.COMB, path + "comb.html");

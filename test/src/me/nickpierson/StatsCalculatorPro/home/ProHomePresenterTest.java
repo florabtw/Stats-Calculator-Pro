@@ -20,7 +20,6 @@ import android.content.Intent;
 @RunWith(RobolectricTestRunner.class)
 public class ProHomePresenterTest extends HomePresenterTest {
 
-	@Override
 	public void createPresenter() {
 		ProHomePresenter.create(activity, model, view);
 	}
