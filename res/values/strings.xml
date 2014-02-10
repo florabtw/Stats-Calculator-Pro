@@ -14,5 +14,7 @@
     <string name="remove_desc">remove list item</string>
     <string name="about_desc">about list item</string>
     <string name="pro_basic_recover">Restore Results</string>
+    <string name="dark_mode">dark mode</string>
+    <string name="dark_mode_title">Dark Mode</string>
 
 </resources>
