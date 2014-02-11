@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="DarkHomeTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/darker_background</item>
@@ -7,9 +7,12 @@
         <item name="greenOutlinedSelector">@drawable/green_darker_border_selector</item>
     </style>
 
+    <!-- TODO: Remove textViewTextColor since it is replaced by android:textColor
+         additionally, it can probably be deleted from library themes, too -->
     <style name="DarkNotHomeTheme" parent="AppTheme">
         <item name="themeName">@string/theme_name_dark</item>
         <item name="android:windowBackground">@color/darker_background</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="defaultOutlinedDrawable">@drawable/white_border</item>
         <item name="redOutlinedSelector">@drawable/red_dark_border_selector</item>
         <item name="brownOutlinedSelector">@drawable/brown_dark_border_selector</item>
