@@ -16,5 +16,7 @@
     <string name="pro_basic_recover">Restore Results</string>
     <string name="dark_mode">dark mode</string>
     <string name="dark_mode_title">Dark Mode</string>
+    <string name="theme_name_light">light</string>
+    <string name="theme_name_dark">dark</string>
 
 </resources>
