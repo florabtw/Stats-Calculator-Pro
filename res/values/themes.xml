@@ -13,7 +13,7 @@
         <item name="defaultListItemColor">@color/dark_background</item>
         <item name="defaultSelectedListItemColor">@color/dark_selected_list_item</item>
         <item name="listviewDividerColor">@color/dark_divider_color</item>
-        <item name="resultsTextViewTextColor">@android:color/white</item>
+        <item name="textViewTextColor">@android:color/white</item>
         <item name="editTextColor">@android:color/white</item>
         <item name="defaultOutlinedSelector">@drawable/white_border_selector</item>
         <item name="upArrowIcon">@drawable/ic_up_arrow_white</item>
