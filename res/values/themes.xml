@@ -3,15 +3,19 @@
 
     <style name="DarkHomeTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/darker_background</item>
-        <item name="blueOutlinedDrawable">@drawable/blue_dark_border_selector_dark</item>
-        <item name="greenOutlinedDrawable">@drawable/green_dark_border_selector</item>
+        <item name="blueOutlinedSelector">@drawable/blue_darker_border_selector</item>
+        <item name="greenOutlinedSelector">@drawable/green_darker_border_selector</item>
     </style>
 
     <style name="DarkNotHomeTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/darker_background</item>
         <item name="defaultOutlinedDrawable">@drawable/white_border</item>
+        <item name="redOutlinedSelector">@drawable/red_dark_border_selector</item>
+        <item name="brownOutlinedSelector">@drawable/brown_dark_border_selector</item>
+        <item name="blueOutlinedSelector">@drawable/blue_dark_border_selector</item>
+        <item name="greenOutlinedSelector">@drawable/green_dark_border_selector</item>
         <item name="defaultListItemColor">@color/dark_background</item>
-        <item name="defaultSelectedListItemColor">@color/dark_selected_list_item</item>
+        <item name="defaultSelectedListItemColor">@color/dark_selection</item>
         <item name="listviewDividerColor">@color/dark_divider_color</item>
         <item name="textViewTextColor">@android:color/white</item>
         <item name="editTextColor">@android:color/white</item>
