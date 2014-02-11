@@ -7,8 +7,6 @@
         <item name="greenOutlinedSelector">@drawable/green_darker_border_selector</item>
     </style>
 
-    <!-- TODO: Remove textViewTextColor since it is replaced by android:textColor
-         additionally, it can probably be deleted from library themes, too -->
     <style name="DarkNotHomeTheme" parent="AppTheme">
         <item name="themeName">@string/theme_name_dark</item>
         <item name="android:windowBackground">@color/darker_background</item>
