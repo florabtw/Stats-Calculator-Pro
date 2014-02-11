@@ -16,12 +16,20 @@
         <item name="resultsTextViewTextColor">@android:color/white</item>
         <item name="editTextColor">@android:color/white</item>
         <item name="defaultOutlinedSelector">@drawable/white_border_selector</item>
+        <item name="upArrowIcon">@drawable/ic_up_arrow_white</item>
+        <item name="downArrowIcon">@drawable/ic_down_arrow_white</item>
+        <item name="removeIcon">@drawable/ic_remove_white</item>
+        <item name="aboutIcon">@drawable/ic_about_white</item>
     </style>
 
     <style name="LightNotHomeTheme" parent="NotHomeTheme">
         <item name="defaultListItemColor">@color/fifa</item>
         <item name="defaultSelectedListItemColor">@color/white_selection</item>
         <item name="listviewDividerColor">@android:drawable/divider_horizontal_bright</item>
+        <item name="upArrowIcon">@drawable/ic_up_arrow</item>
+        <item name="downArrowIcon">@drawable/ic_down_arrow</item>
+        <item name="removeIcon">@drawable/ic_remove</item>
+        <item name="aboutIcon">@drawable/ic_about</item>
     </style>
 
 </resources>
