@@ -6,6 +6,8 @@
     android:layout_height="0dp"
     android:layout_above="@+id/pro_results_controller"
     android:layout_alignParentTop="true"
-    android:layout_alignWithParentIfMissing="true" >
+    android:layout_alignWithParentIfMissing="true"
+    android:divider="?attr/listviewDividerColor"
+    android:dividerHeight="1dp" >
 
 </ListView>

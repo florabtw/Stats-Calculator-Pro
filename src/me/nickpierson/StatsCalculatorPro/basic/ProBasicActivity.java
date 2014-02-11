@@ -10,6 +10,7 @@ import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,11 @@ public class ProBasicActivity extends BasicActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		if (sharedPref.getBoolean(getString(R.string.dark_mode), false)) {
+			setTheme(R.style.DarkNotHomeTheme);
+		}
+
 		super.onCreate(savedInstanceState);
 
 		prefs = getPreferences(MODE_PRIVATE);

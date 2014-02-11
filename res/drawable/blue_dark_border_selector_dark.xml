@@ -7,7 +7,7 @@
             <stroke android:width="3dp" android:color="@color/pastel_blue" />
         </shape></item>
     <item><shape>
-            <solid android:color="@color/dark_background" />
+            <solid android:color="@color/darker_background" />
 
             <stroke android:width="3dp" android:color="@color/pastel_blue" />
         </shape></item>

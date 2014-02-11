@@ -11,7 +11,9 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_toLeftOf="@+id/pro_results_controller" >
+        android:layout_toLeftOf="@+id/pro_results_controller"
+        android:divider="?attr/listviewDividerColor"
+        android:dividerHeight="1dp" >
     </ListView>
 
     <LinearLayout
