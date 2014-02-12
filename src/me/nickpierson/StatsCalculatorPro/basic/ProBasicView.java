@@ -182,9 +182,15 @@ public class ProBasicView extends BasicView implements IHelperView {
 	}
 
 	@Override
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void displayItemInfo(String url) {
-		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+		AlertDialog.Builder dialog;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			dialog = new AlertDialog.Builder(activity, getDialogTheme());
+		} else {
+			dialog = new AlertDialog.Builder(activity);
+		}
+
 		WebView view = (WebView) LayoutInflater.from(activity).inflate(R.layout.pro_shared_webview, null);
 		view.loadUrl(url);
 		view.getSettings().setJavaScriptEnabled(true);
