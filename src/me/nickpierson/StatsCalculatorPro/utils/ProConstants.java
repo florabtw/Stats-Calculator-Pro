@@ -31,9 +31,9 @@ public class ProConstants {
 		}
 
 		public static String getPath(String input) {
-			for (BasicInfoPaths test : BasicInfoPaths.values()) {
-				if (test.name == input) {
-					return test.path;
+			for (BasicInfoPaths path : BasicInfoPaths.values()) {
+				if (path.name.equals(input)) {
+					return path.path;
 				}
 			}
 

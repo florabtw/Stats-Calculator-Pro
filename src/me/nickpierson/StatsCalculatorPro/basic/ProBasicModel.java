@@ -80,10 +80,10 @@ public class ProBasicModel extends BasicModel implements IHelperModel {
 
 	@Override
 	public String getEquationUrl(String key) {
-		String themePath = getThemePath();
-		return "file:///android_asset/" + themePath + ProConstants.BasicInfoPaths.getPath(key);
+		return "file:///android_asset/" + getThemePath() + ProConstants.BasicInfoPaths.getPath(key);
 	}
 
+	// This is to make testing easier
 	String getThemePath() {
 		if (ProThemeHelper.isDarkTheme(activity)) {
 			return "dark/";
