@@ -28,7 +28,7 @@ public class ProPCActivity extends PCActivity {
 		prefs = getPreferences(MODE_PRIVATE);
 		ArrayList<String> resultsOrder = loadResults(prefs.getString(ProConstants.RESULTS_KEY, null));
 
-		model = new ProPCModel();
+		model = new ProPCModel(this);
 		view = new ProPCView(this, resultsOrder);
 		ProPCPresenter.create(this, (ProPCModel) model, (ProPCView) view);
 

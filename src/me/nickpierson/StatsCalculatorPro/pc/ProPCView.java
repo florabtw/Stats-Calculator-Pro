@@ -10,10 +10,13 @@ import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProDefaultAdapter;
 import me.nickpierson.StatsCalculatorPro.utils.ProKeypadHelper;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -172,14 +175,34 @@ public class ProPCView extends PCView implements IHelperView {
 	}
 
 	@Override
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	public void displayItemInfo(String url) {
-		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+		AlertDialog.Builder dialog;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			dialog = new AlertDialog.Builder(activity, getDialogTheme());
+		} else {
+			dialog = new AlertDialog.Builder(activity);
+		}
 		WebView view = (WebView) LayoutInflater.from(activity).inflate(R.layout.pro_shared_webview, null);
 		view.loadUrl(url);
 		view.getSettings().setJavaScriptEnabled(true);
 		dialog.setView(view);
 		dialog.show();
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public int getDialogTheme() {
+		TypedArray attrs = activity.getTheme().obtainStyledAttributes(new int[] { R.attr.themeName });
+		int themeName = attrs.getResourceId(0, R.string.theme_name_light);
+
+		int dialogTheme;
+		if (themeName == R.string.theme_name_dark) {
+			dialogTheme = AlertDialog.THEME_HOLO_DARK;
+		} else {
+			dialogTheme = AlertDialog.THEME_HOLO_LIGHT;
+		}
+
+		return dialogTheme;
 	}
 
 	@Override

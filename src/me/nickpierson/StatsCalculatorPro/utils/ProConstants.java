@@ -40,4 +40,28 @@ public class ProConstants {
 			return null;
 		}
 	}
+
+	public static enum PCInfoPaths {
+		N_FACT(Constants.N_FACT, "n_fact.html"), R_FACT(Constants.R_FACT, "r_fact.html"), N_SUBFACT(Constants.N_SUBFACT, "n_subfact.html"), R_SUBFACT(
+				Constants.R_SUBFACT, "r_subfact.html"), PERM(Constants.PERM, "perm.html"), REP_PERM(Constants.REP_PERM, "rep_perm.html"), COMB(Constants.COMB,
+				"comb.html"), REP_COMB(Constants.REP_COMB, "rep_comb.html"), INDISTINCT_PERM(Constants.INDISTINCT_PERM, "indistinct_perm.html"), PIGEONHOLE(
+				Constants.PIGEONHOLE, "pigeonhole.html");
+
+		private String name, path;
+
+		private PCInfoPaths(String name, String path) {
+			this.name = name;
+			this.path = path;
+		}
+
+		public static String getPath(String input) {
+			for (PCInfoPaths path : PCInfoPaths.values()) {
+				if (path.name.equals(input)) {
+					return path.path;
+				}
+			}
+
+			return null;
+		}
+	}
 }
