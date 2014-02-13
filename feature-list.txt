@@ -25,3 +25,4 @@
 - Checkbox for keypad vibrate feedback
 - Checkbox for keypad sound feedback
 - Checkbox for keeping screen on
+- Checkbox for Dark Mode
