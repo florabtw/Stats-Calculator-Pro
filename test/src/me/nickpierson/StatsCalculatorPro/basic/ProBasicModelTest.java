@@ -2,6 +2,8 @@ package me.nickpierson.StatsCalculatorPro.basic;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public class ProBasicModelTest extends BasicModelTest {
 	public void setup() {
 		super.setup();
 
-		proModel = new ProBasicModel(activity);
+		proModel = spy(new ProBasicModel(activity));
 	}
 
 	@Test
@@ -72,28 +74,58 @@ public class ProBasicModelTest extends BasicModelTest {
 
 	@Test
 	public void getEquationUrl_ReturnsCorrectUrl() {
-		assertEquals("file:///android_asset/size.html", proModel.getEquationUrl(Constants.SIZE));
-		assertEquals("file:///android_asset/sum.html", proModel.getEquationUrl(Constants.SUM));
-		assertEquals("file:///android_asset/min.html", proModel.getEquationUrl(Constants.MIN));
-		assertEquals("file:///android_asset/max.html", proModel.getEquationUrl(Constants.MAX));
-		assertEquals("file:///android_asset/arith_mean.html", proModel.getEquationUrl(Constants.ARITH_MEAN));
-		assertEquals("file:///android_asset/geo_mean.html", proModel.getEquationUrl(Constants.GEO_MEAN));
-		assertEquals("file:///android_asset/mode.html", proModel.getEquationUrl(Constants.MODE));
-		assertEquals("file:///android_asset/range.html", proModel.getEquationUrl(Constants.RANGE));
-		assertEquals("file:///android_asset/first_quart.html", proModel.getEquationUrl(Constants.FIRST_QUART));
-		assertEquals("file:///android_asset/median.html", proModel.getEquationUrl(Constants.MEDIAN));
-		assertEquals("file:///android_asset/third_quart.html", proModel.getEquationUrl(Constants.THIRD_QUART));
-		assertEquals("file:///android_asset/iqr.html", proModel.getEquationUrl(Constants.IQR));
-		assertEquals("file:///android_asset/sample_var.html", proModel.getEquationUrl(Constants.SAMPLE_VAR));
-		assertEquals("file:///android_asset/pop_var.html", proModel.getEquationUrl(Constants.POP_VAR));
-		assertEquals("file:///android_asset/sample_dev.html", proModel.getEquationUrl(Constants.SAMPLE_DEV));
-		assertEquals("file:///android_asset/pop_dev.html", proModel.getEquationUrl(Constants.POP_DEV));
-		assertEquals("file:///android_asset/coeff_var.html", proModel.getEquationUrl(Constants.COEFF_VAR));
-		assertEquals("file:///android_asset/skewness.html", proModel.getEquationUrl(Constants.SKEWNESS));
-		assertEquals("file:///android_asset/kurtosis.html", proModel.getEquationUrl(Constants.KURTOSIS));
-		assertEquals("file:///android_asset/std_error.html", proModel.getEquationUrl(ProConstants.STD_ERROR));
-		assertEquals("file:///android_asset/sum_sqrs.html", proModel.getEquationUrl(ProConstants.SUM_SQRS));
-		assertEquals("file:///android_asset/rms.html", proModel.getEquationUrl(ProConstants.RMS));
+		doReturn("light/").when(proModel).getThemePath();
+
+		assertEquals("file:///android_asset/light/size.html", proModel.getEquationUrl(Constants.SIZE));
+		assertEquals("file:///android_asset/light/sum.html", proModel.getEquationUrl(Constants.SUM));
+		assertEquals("file:///android_asset/light/min.html", proModel.getEquationUrl(Constants.MIN));
+		assertEquals("file:///android_asset/light/max.html", proModel.getEquationUrl(Constants.MAX));
+		assertEquals("file:///android_asset/light/arith_mean.html", proModel.getEquationUrl(Constants.ARITH_MEAN));
+		assertEquals("file:///android_asset/light/geo_mean.html", proModel.getEquationUrl(Constants.GEO_MEAN));
+		assertEquals("file:///android_asset/light/mode.html", proModel.getEquationUrl(Constants.MODE));
+		assertEquals("file:///android_asset/light/range.html", proModel.getEquationUrl(Constants.RANGE));
+		assertEquals("file:///android_asset/light/first_quart.html", proModel.getEquationUrl(Constants.FIRST_QUART));
+		assertEquals("file:///android_asset/light/median.html", proModel.getEquationUrl(Constants.MEDIAN));
+		assertEquals("file:///android_asset/light/third_quart.html", proModel.getEquationUrl(Constants.THIRD_QUART));
+		assertEquals("file:///android_asset/light/iqr.html", proModel.getEquationUrl(Constants.IQR));
+		assertEquals("file:///android_asset/light/sample_var.html", proModel.getEquationUrl(Constants.SAMPLE_VAR));
+		assertEquals("file:///android_asset/light/pop_var.html", proModel.getEquationUrl(Constants.POP_VAR));
+		assertEquals("file:///android_asset/light/sample_dev.html", proModel.getEquationUrl(Constants.SAMPLE_DEV));
+		assertEquals("file:///android_asset/light/pop_dev.html", proModel.getEquationUrl(Constants.POP_DEV));
+		assertEquals("file:///android_asset/light/coeff_var.html", proModel.getEquationUrl(Constants.COEFF_VAR));
+		assertEquals("file:///android_asset/light/skewness.html", proModel.getEquationUrl(Constants.SKEWNESS));
+		assertEquals("file:///android_asset/light/kurtosis.html", proModel.getEquationUrl(Constants.KURTOSIS));
+		assertEquals("file:///android_asset/light/std_error.html", proModel.getEquationUrl(ProConstants.STD_ERROR));
+		assertEquals("file:///android_asset/light/sum_sqrs.html", proModel.getEquationUrl(ProConstants.SUM_SQRS));
+		assertEquals("file:///android_asset/light/rms.html", proModel.getEquationUrl(ProConstants.RMS));
+	}
+
+	@Test
+	public void getEquationUrlWhenDarkTheme_ReturnsCorrectUrl() {
+		doReturn("dark/").when(proModel).getThemePath();
+
+		assertEquals("file:///android_asset/dark/size.html", proModel.getEquationUrl(Constants.SIZE));
+		assertEquals("file:///android_asset/dark/sum.html", proModel.getEquationUrl(Constants.SUM));
+		assertEquals("file:///android_asset/dark/min.html", proModel.getEquationUrl(Constants.MIN));
+		assertEquals("file:///android_asset/dark/max.html", proModel.getEquationUrl(Constants.MAX));
+		assertEquals("file:///android_asset/dark/arith_mean.html", proModel.getEquationUrl(Constants.ARITH_MEAN));
+		assertEquals("file:///android_asset/dark/geo_mean.html", proModel.getEquationUrl(Constants.GEO_MEAN));
+		assertEquals("file:///android_asset/dark/mode.html", proModel.getEquationUrl(Constants.MODE));
+		assertEquals("file:///android_asset/dark/range.html", proModel.getEquationUrl(Constants.RANGE));
+		assertEquals("file:///android_asset/dark/first_quart.html", proModel.getEquationUrl(Constants.FIRST_QUART));
+		assertEquals("file:///android_asset/dark/median.html", proModel.getEquationUrl(Constants.MEDIAN));
+		assertEquals("file:///android_asset/dark/third_quart.html", proModel.getEquationUrl(Constants.THIRD_QUART));
+		assertEquals("file:///android_asset/dark/iqr.html", proModel.getEquationUrl(Constants.IQR));
+		assertEquals("file:///android_asset/dark/sample_var.html", proModel.getEquationUrl(Constants.SAMPLE_VAR));
+		assertEquals("file:///android_asset/dark/pop_var.html", proModel.getEquationUrl(Constants.POP_VAR));
+		assertEquals("file:///android_asset/dark/sample_dev.html", proModel.getEquationUrl(Constants.SAMPLE_DEV));
+		assertEquals("file:///android_asset/dark/pop_dev.html", proModel.getEquationUrl(Constants.POP_DEV));
+		assertEquals("file:///android_asset/dark/coeff_var.html", proModel.getEquationUrl(Constants.COEFF_VAR));
+		assertEquals("file:///android_asset/dark/skewness.html", proModel.getEquationUrl(Constants.SKEWNESS));
+		assertEquals("file:///android_asset/dark/kurtosis.html", proModel.getEquationUrl(Constants.KURTOSIS));
+		assertEquals("file:///android_asset/dark/std_error.html", proModel.getEquationUrl(ProConstants.STD_ERROR));
+		assertEquals("file:///android_asset/dark/sum_sqrs.html", proModel.getEquationUrl(ProConstants.SUM_SQRS));
+		assertEquals("file:///android_asset/dark/rms.html", proModel.getEquationUrl(ProConstants.RMS));
 	}
 
 	private ArrayList<String> makeStringList(String... args) {

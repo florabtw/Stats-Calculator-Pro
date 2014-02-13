@@ -7,6 +7,7 @@ import me.nickpierson.StatsCalculator.pc.PCActivity;
 import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
+import me.nickpierson.StatsCalculatorPro.utils.ProThemeHelper;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,12 +21,14 @@ public class ProPCActivity extends PCActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		ProThemeHelper.handleTheme(this);
+
 		super.onCreate(savedInstanceState);
 
 		prefs = getPreferences(MODE_PRIVATE);
 		ArrayList<String> resultsOrder = loadResults(prefs.getString(ProConstants.RESULTS_KEY, null));
 
-		model = new ProPCModel();
+		model = new ProPCModel(this);
 		view = new ProPCView(this, resultsOrder);
 		ProPCPresenter.create(this, (ProPCModel) model, (ProPCView) view);
 

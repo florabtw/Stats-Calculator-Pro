@@ -8,6 +8,7 @@ import me.nickpierson.StatsCalculator.basic.BasicActivity;
 import me.nickpierson.StatsCalculator.utils.Constants;
 import me.nickpierson.StatsCalculatorPro.R;
 import me.nickpierson.StatsCalculatorPro.utils.ProConstants;
+import me.nickpierson.StatsCalculatorPro.utils.ProThemeHelper;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,8 @@ public class ProBasicActivity extends BasicActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		ProThemeHelper.handleTheme(this);
+
 		super.onCreate(savedInstanceState);
 
 		prefs = getPreferences(MODE_PRIVATE);

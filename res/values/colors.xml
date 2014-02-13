@@ -2,5 +2,10 @@
 <resources>
 
     <color name="white_selection">#DFDFDF</color>
+    <color name="darker_background">#000</color>
+    <color name="dark_background">#181818</color>
+    <color name="dark_selection">#2A2A2A</color>
+    <color name="dark_divider_color">#303030</color>
+    <color name="dark_glow">#4A4A4A</color>
 
 </resources>
