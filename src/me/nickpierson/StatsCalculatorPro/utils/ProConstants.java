@@ -11,6 +11,7 @@ public class ProConstants {
 	public static final String[] PRO_BASIC_TITLES = { STD_ERROR, SUM_SQRS, RMS };
 
 	public static final String COPY_NOTIFICATION = "Copied to Clipboard";
+	public static final String SETTINGS_NOTIFICATION = "Please exit the settings screen to see changes.";
 	public static final String RESULTS_KEY = "results order";
 	public static final String SELECTED_POS_KEY = "selected pos";
 
